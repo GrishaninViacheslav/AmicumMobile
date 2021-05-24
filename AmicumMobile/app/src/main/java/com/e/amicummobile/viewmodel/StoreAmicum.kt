@@ -14,18 +14,34 @@ import com.e.amicummobile.modelAmicum.RepositoryImpl
  *  - выбор меню системы (дата, подразделение, шахта и т.д.)
  */
 class StoreAmicum(
-    private val userSessionToObserve: MutableLiveData<UserSession> = MutableLiveData(),
 
+    // STATE
+    private val userSession: MutableLiveData<UserSession> = MutableLiveData(),
     private val repositoryImpl: Repository = RepositoryImpl()
-) : ViewModel() {
-    fun getUserSession() = userSessionToObserve
 
+) : ViewModel() {
+
+    // GETTER
+    fun getUserSession() = userSession
+
+    // ACTION
     fun getDataFromLocalSource() {
         Log.println(Log.ERROR, "storeAmicum.getDataFromLocalSource", "получил данные с сервера")
     }
 
     fun getDataFromRemoteSource() {
         Log.println(Log.ERROR, "storeAmicum.getDataFromRemoteSource", "получил данные с сервера")
+    }
+
+    /**
+     * Метод проверки наличия авторизации пользователя на сервере
+     */
+    fun checkUserSession(): Boolean {
+        var statusSession: Boolean = false;
+        if (userSession.value != null && userSession.value?.workerId != -1) {
+            statusSession = true;
+        }
+        return statusSession;
     }
 
 

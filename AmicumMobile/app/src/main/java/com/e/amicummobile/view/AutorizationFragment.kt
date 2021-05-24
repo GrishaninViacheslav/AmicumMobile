@@ -16,7 +16,7 @@ class AutorizationFragment : Fragment() {
 
     private var _binding: AutorizationFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var storeAmicum: StoreAmicum
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,8 +28,7 @@ class AutorizationFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        storeAmicum = ViewModelProvider(this).get(StoreAmicum::class.java)
-        storeAmicum.getDataFromRemoteSource()
+
     }
 
     override fun onDestroyView() {
