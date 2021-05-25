@@ -32,7 +32,7 @@ class SplashScreenFragment : Fragment() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             parentFragmentManager.beginTransaction().remove(this).commitNow()
-        }, 5000)
+        }, 3000)
     }
 
     override fun onDestroyView() {

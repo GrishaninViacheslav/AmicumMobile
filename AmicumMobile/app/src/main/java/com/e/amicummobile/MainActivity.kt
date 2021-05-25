@@ -1,7 +1,14 @@
 package com.e.amicummobile
 
+import android.content.Context
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.renderscript.Allocation
+import android.renderscript.Element
+import android.renderscript.RenderScript
+import android.renderscript.ScriptIntrinsicBlur
+import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModelProvider
 import com.e.amicummobile.view.AutorizationFragment
@@ -33,10 +40,9 @@ class MainActivity : AppCompatActivity() {
                     .commitNow()
             }
 
-            supportFragmentManager.beginTransaction()                                                                 // поверх открываем всплывающее окно, которое закроется через 5 секунд
+            supportFragmentManager.beginTransaction()                                                                   // поверх открываем всплывающее окно, которое закроется через 5 секунд
                 .add(R.id.container, SplashScreenFragment.newInstance())
                 .commitNow()
         }
     }
-
 }
