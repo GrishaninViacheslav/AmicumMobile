@@ -5,16 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.e.amicummobile.databinding.AutorizationFragmentBinding
-import com.e.amicummobile.viewmodel.StoreAmicum
+import com.e.amicummobile.databinding.AuthorizationFragmentBinding
 
 /**
  * Страница авторизации пользователя в системе
  */
-class AutorizationFragment : Fragment() {
+class AuthorizationFragment : Fragment() {
 
-    private var _binding: AutorizationFragmentBinding? = null
+    private var _binding: AuthorizationFragmentBinding? = null
     private val binding get() = _binding!!
 
 
@@ -22,7 +20,7 @@ class AutorizationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = AutorizationFragmentBinding.inflate(inflater, container, false)
+        _binding = AuthorizationFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -37,6 +35,6 @@ class AutorizationFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = AutorizationFragment()
+        fun newInstance() = AuthorizationFragment()
     }
 }

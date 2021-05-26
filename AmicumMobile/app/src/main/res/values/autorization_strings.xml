@@ -7,4 +7,7 @@
     <string name="hintPwd">Введите пароль</string>
     <string name="lblLogin">Логин</string>
     <string name="lblPwd">Пароль</string>
+    <string name="chkActiveDirectory">Авторизация по ActiveDirectory</string>
+    <string name="btnLogin">ВОЙТИ</string>
+    <string name="smallLogo">Логотип</string>
 </resources>

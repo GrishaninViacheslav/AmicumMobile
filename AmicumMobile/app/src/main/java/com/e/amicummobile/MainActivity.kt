@@ -1,17 +1,9 @@
 package com.e.amicummobile
 
-import android.content.Context
-import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.renderscript.Allocation
-import android.renderscript.Element
-import android.renderscript.RenderScript
-import android.renderscript.ScriptIntrinsicBlur
-import android.view.View
-import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModelProvider
-import com.e.amicummobile.view.AutorizationFragment
+import com.e.amicummobile.view.AuthorizationFragment
 import com.e.amicummobile.view.MainMenuFragment
 import com.e.amicummobile.view.SplashScreenFragment
 import com.e.amicummobile.viewmodel.StoreAmicum
@@ -36,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             if (!storeAmicum.checkUserSession()) {
                 supportFragmentManager.beginTransaction()                                                               // сразу заполняем фреймом авторизации
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                    .add(R.id.container, AutorizationFragment.newInstance())
+                    .add(R.id.container, AuthorizationFragment.newInstance())
                     .commitNow()
             }
 

@@ -4,7 +4,7 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   android:background="@color/autorization_background_color">
+                                                   android:background="@color/authorization_background_color">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,39 +14,42 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="32dp" android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="24dp"
             android:layout_marginBottom="32dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/fragment_rounded" app:layout_constraintHorizontal_bias="0.0"
+            android:background="@drawable/fragment_rounded"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintVertical_bias="0.0">
 
         <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="71dp"
                 android:layout_height="71dp"
                 app:srcCompat="@drawable/logo_small"
-                android:id="@+id/imageView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"/>
+                android:layout_marginStart="16dp"
+                android:contentDescription="@string/smallLogo"/>
         <com.google.android.material.button.MaterialButton
+                style="@style/MaterialButtonStyle"
+                android:id="@+id/btnCloseApplication"
                 android:text="@string/btnCloseApplication"
                 android:layout_width="89dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnCloseApplication"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="25dp"
                 android:background="#FFFFFF"
-                style="@style/MaterialButtonStyle"
                 android:textColor="#EF7F1A"
                 android:fontFamily="@font/roboto_regular"/>
         <com.google.android.material.textview.MaterialTextView
                 android:text="@string/lblEntryInSystem"
+                android:id="@+id/lblEntryInSystem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblEntryInSystem"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="124dp"
@@ -56,9 +59,9 @@
                 android:fontFamily="@font/roboto_regular"/>
         <com.google.android.material.textview.MaterialTextView
                 android:text="@string/lblWelcome"
+                android:id="@+id/lblWelcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblWelcome"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="16dp"
                 android:textColor="#000000"
@@ -66,67 +69,83 @@
                 android:fontFamily="@font/roboto_regular" app:layout_constraintTop_toBottomOf="@+id/lblEntryInSystem"
                 android:layout_marginTop="15dp"/>
         <TextView
-                android:text="@string/lblLogin"
                 style="@style/LabelText"
+                android:id="@+id/lblLogin"
+                android:text="@string/lblLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblLogin"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="240dp"/>
         <EditText
+                style="@style/EditText"
+                android:id="@+id/txtLogin"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:inputType="textPersonName"
-                tools:text="MECHEL\IVANOVII"
                 android:hint="@string/hintLogin"
                 android:ems="10"
-                android:id="@+id/txtLogin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                style="@style/EditText"
                 android:autofillHints="" app:layout_constraintTop_toBottomOf="@+id/lblLogin"
                 android:layout_marginTop="10dp"/>
         <TextView
-                android:text="@string/lblPwd"
                 style="@style/LabelText"
+                android:id="@+id/lblPwd"
+                android:text="@string/lblPwd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblPwd"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="16dp"
                 app:layout_constraintTop_toBottomOf="@+id/txtLogin" android:layout_marginTop="20dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
-
+                style="@style/PwdText"
+                android:id="@+id/txtPwd"
                 app:passwordToggleEnabled="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:inputType="textPassword"
-                tools:text="MECHEL\IVANOVII"
                 android:ems="10"
-                android:id="@+id/txtPwd"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:textSize="14sp"
-                style="@style/PwdText"
                 app:layout_constraintTop_toBottomOf="@+id/lblPwd"
 >
             <com.google.android.material.textfield.TextInputEditText
+                    style="@style/PwdAttachText" android:textColorHighlight="#FFFFFF"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:hint="@string/hintPwd"
                     android:inputType="textPassword"
                     tools:text="Пароль"
-                    style="@style/PwdAttachText" android:textColorHighlight="#FFFFFF"
                     android:textCursorDrawable="@color/black"/>
         </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.checkbox.MaterialCheckBox
+                style="@style/CheckBox"
+                android:id="@+id/checkBox"
+                android:text="@string/chkActiveDirectory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPwd"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="16dp"/>
+
+        <com.google.android.material.button.MaterialButton
+                style="@style/MaterialButtonStyleFill"
+                android:id="@+id/btnLogin"
+                android:text="@string/btnLogin"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/roboto_regular"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
