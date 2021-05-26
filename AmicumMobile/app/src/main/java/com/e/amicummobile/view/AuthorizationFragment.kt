@@ -24,10 +24,14 @@ class AuthorizationFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding?.btnCloseApplication?.setOnClickListener {                                                             // обработка нажания кнопки закрыть
+            closeApp()
+        }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -36,5 +40,12 @@ class AuthorizationFragment : Fragment() {
 
     companion object {
         fun newInstance() = AuthorizationFragment()
+    }
+
+    /**
+     * Метод закрытия приложения
+     */
+    private fun closeApp() {
+        activity?.finishAffinity()
     }
 }
