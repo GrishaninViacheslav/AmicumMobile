@@ -3,9 +3,13 @@ package com.e.amicummobile.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.e.amicummobile.modelAmicum.UserSession
-import com.e.amicummobile.modelAmicum.Repository
+import com.e.amicummobile.controller.Assistant
+import com.e.amicummobile.modelAmicum.ConfigToRequest
+import com.e.amicummobile.modelAmicum.IRepository
 import com.e.amicummobile.modelAmicum.RepositoryImpl
+import com.e.amicummobile.modelAmicum.UserSession
+import com.google.gson.GsonBuilder
+
 
 /**
  * Главное хранилище системы АМИКУМ:
@@ -17,7 +21,7 @@ class StoreAmicum(
 
     // STATE
     private val userSession: MutableLiveData<UserSession> = MutableLiveData(),
-    private val repositoryImpl: Repository = RepositoryImpl()
+    private val repositoryImpl: IRepository = RepositoryImpl()
 
 ) : ViewModel() {
 
@@ -25,13 +29,42 @@ class StoreAmicum(
     fun getUserSession() = userSession
 
     // ACTION
-    fun getDataFromLocalSource() {
-        Log.println(Log.ERROR, "storeAmicum.getDataFromLocalSource", "получил данные с сервера")
+
+    /**
+     * Метод авторизации пользователя на сервер и получения сессионных данных о нем
+     */
+    fun getLogin(login: String, pwd: String, typeAuthorization: Boolean): Boolean {
+        Log.println(Log.INFO, "storeAmicum.getLogin", "Запрос авторизации на сервере")
+        Log.println(
+            Log.INFO,
+            "storeAmicum.getLogin",
+            "login: " + login + " pwd: " + pwd + " typeAuthorization: " + typeAuthorization
+        )
+        var statusAutorization = false
+        val payload: UserAutorizationActionLoginRequest = UserAutorizationActionLoginRequest(
+            login = login,
+            password = pwd,
+            activeDirectoryFlag = typeAuthorization
+        )
+
+        val jsonString: String = Assistant.toJson(payload)
+
+        val config: ConfigToRequest = ConfigToRequest(
+            "UserAutorization",
+            "actionLogin",
+            "",
+            jsonString
+        )
+        repositoryImpl.getData(config)
+
+        return statusAutorization
     }
 
-    fun getDataFromRemoteSource() {
-        Log.println(Log.ERROR, "storeAmicum.getDataFromRemoteSource", "получил данные с сервера")
-    }
+    data class UserAutorizationActionLoginRequest(
+        val login: String,
+        val password: String,
+        val activeDirectoryFlag: Boolean
+    )
 
     /**
      * Метод проверки наличия авторизации пользователя на сервере

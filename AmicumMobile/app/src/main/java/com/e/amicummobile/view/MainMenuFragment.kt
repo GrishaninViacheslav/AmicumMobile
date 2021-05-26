@@ -34,7 +34,6 @@ class MainMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         storeAmicum = ViewModelProvider(this).get(StoreAmicum::class.java)
-        storeAmicum.getDataFromRemoteSource()
     }
 
     override fun onDestroyView() {

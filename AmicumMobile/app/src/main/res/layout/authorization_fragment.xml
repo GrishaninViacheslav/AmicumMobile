@@ -78,6 +78,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="240dp"/>
+        <TextView
+                style="@style/LabelMessageText"
+                android:id="@+id/lblMessage"
+                tools:text="@string/emptyLogin"
+                android:layout_width="205dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="240dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp" android:gravity="end"/>
+
         <EditText
                 style="@style/EditText"
                 android:id="@+id/txtLogin"
@@ -104,7 +115,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
                 style="@style/PwdText"
-                android:id="@+id/txtPwd"
+                android:id="@+id/layoutPwd"
                 app:passwordToggleEnabled="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -113,12 +124,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
+                android:hint=" "
                 android:textSize="14sp"
                 app:layout_constraintTop_toBottomOf="@+id/lblPwd"
 >
             <com.google.android.material.textfield.TextInputEditText
-                    style="@style/PwdAttachText" android:textColorHighlight="#FFFFFF"
-                    android:layout_height="wrap_content"
+                    style="@style/PwdAttachText"
+                    android:id="@+id/txtPwd"
+                    android:textColorHighlight="#FFFFFF"
+                    android:layout_height="60dp"
                     android:layout_width="match_parent"
                     android:hint="@string/hintPwd"
                     android:inputType="textPassword"
@@ -132,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtPwd"
+                app:layout_constraintTop_toBottomOf="@+id/layoutPwd"
                 android:layout_marginTop="40dp"
                 android:layout_marginStart="16dp"/>
 
