@@ -3,7 +3,7 @@
     <style name="ThemeAmicumMobile" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/strokeColor</item>
-        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorPrimaryVariant">#5A6272</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -14,8 +14,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:textSize">14sp</item>
+        <item name="fontFamily">Roboto</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="actionModeBackground">@color/white</item>
         <item name="textInputStyle">@style/TextLayout</item>
         <item name="materialButtonStyle">@style/MaterialButtonStyle</item>
+        <item name="navigationViewStyle">@style/NavigationView</item>
     </style>
 
     <style name="LabelText" parent="ThemeAmicumMobile">
@@ -55,4 +59,24 @@
         <item name="backgroundTint">@color/white</item>
         <item name="android:padding">0sp</item>
     </style>
+
+    <style name="MaterialButtonStyleMainMenu" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:padding">0sp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+    <style name="MainMenuStyle">
+        <item name="android:layout_marginStart">10dp</item>
+    </style>
+
+    <style name="NavigationView" parent="Widget.MaterialComponents.NavigationView">
+        <item name="android:layout_gravity">start</item>
+        <item name="android:choiceMode">none</item>
+    </style>
+
+
 </resources>

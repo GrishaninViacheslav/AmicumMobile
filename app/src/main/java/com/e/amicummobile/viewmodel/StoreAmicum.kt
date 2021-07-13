@@ -49,7 +49,8 @@ class StoreAmicum(
         )
         statusAuthorization = false
 
-        if (login == "1" && pwd == "1" && Bootstrap.TYPE_BUILD == Const.VERSION_DEBUG) {                                 // TODO отладочный костыль убрать в релизе
+//        if (login == "1" && pwd == "1" && Bootstrap.TYPE_BUILD == Const.VERSION_DEBUG) {                                 // TODO отладочный костыль убрать в релизе
+        if (Bootstrap.TYPE_BUILD == Const.VERSION_DEBUG) {
             statusAuthorization = true
         }
 

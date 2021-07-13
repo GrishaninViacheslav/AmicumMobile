@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.amicummobile.databinding.MainMenuFragmentBinding
@@ -29,6 +30,9 @@ class MainMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         storeAmicum = ViewModelProvider(this).get(StoreAmicum::class.java)
+        binding.openMainMenu.setOnClickListener {                                                                // обработка нажания кнопки закрыть
+            binding.drawerMainMenu.openDrawer(GravityCompat.START)
+        }
     }
 
     override fun onDestroyView() {

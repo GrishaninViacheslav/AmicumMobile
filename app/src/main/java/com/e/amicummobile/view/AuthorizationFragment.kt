@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.e.amicummobile.config.Bootstrap
+import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.AuthorizationFragmentBinding
 import com.e.amicummobile.viewmodel.StoreAmicum
 
@@ -67,7 +69,7 @@ class AuthorizationFragment : Fragment() {
             }
 
             // выполняем авторизацию
-            if (statusCheckField) {
+            if (statusCheckField || Bootstrap.TYPE_BUILD == Const.VERSION_DEBUG) {
                 statusAuthorization = storeAmicum.getLogin(
                     binding.txtLogin.text.toString(),
                     binding.txtPwd.text.toString(),
