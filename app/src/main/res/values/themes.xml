@@ -45,7 +45,7 @@
     <style name="MaterialButtonStyleFill" parent="ThemeAmicumMobile">
         <item name="backgroundTint">#598D9B</item>
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:background">#598D9B</item>
+<!--        <item name="android:background">@drawable/button_effect</item>-->
         <item name="android:textSize">14sp</item>
         <item name="android:padding">0sp</item>
     </style>

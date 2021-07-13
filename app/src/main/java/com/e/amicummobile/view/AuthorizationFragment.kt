@@ -75,8 +75,8 @@ class AuthorizationFragment : Fragment() {
                 )
 
                 if (!statusAuthorization) {
-                    binding.layoutLogin.error = "Логин неверный!"
-                    binding.layoutPwd.error = "Пароль неверный!"
+                    binding.layoutLogin.error = " "
+                    binding.layoutPwd.error = "Введены неверные логин / пароль"
                 } else {
                     binding.layoutLogin.error = null
                     binding.layoutPwd.error = null
