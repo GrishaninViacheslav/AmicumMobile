@@ -14,6 +14,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:textSize">14sp</item>
+        <item name="textInputStyle">@style/TextLayout</item>
+        <item name="materialButtonStyle">@style/MaterialButtonStyle</item>
     </style>
 
     <style name="LabelText" parent="ThemeAmicumMobile">
@@ -42,11 +44,15 @@
         <item name="android:textColorHint">#B3B3B3</item>
     </style>
 
-    <style name="MaterialButtonStyleFill" parent="ThemeAmicumMobile">
+    <style name="MaterialButtonStyle" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">#598D9B</item>
         <item name="android:textColor">#FFFFFF</item>
-<!--        <item name="android:background">@drawable/button_effect</item>-->
-        <item name="android:textSize">14sp</item>
+        <!--        <item name="android:background">@drawable/button_effect</item>-->
+        <item name="android:padding">0sp</item>
+    </style>
+
+    <style name="MaterialButtonStyleNoBackground" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="backgroundTint">@color/white</item>
         <item name="android:padding">0sp</item>
     </style>
 </resources>

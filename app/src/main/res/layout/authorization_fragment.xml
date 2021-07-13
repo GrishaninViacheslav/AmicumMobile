@@ -33,7 +33,7 @@
                 android:layout_marginStart="16dp"
                 android:contentDescription="@string/smallLogo"/>
         <com.google.android.material.button.MaterialButton
-                style="@style/MaterialButtonStyle"
+                style="@style/MaterialButtonStyleNoBackground"
                 android:id="@+id/btnCloseApplication"
                 android:text="@string/btnCloseApplication"
                 android:layout_width="89dp"
@@ -92,7 +92,6 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextLayout"
                 android:id="@+id/layoutPwd"
                 app:passwordToggleEnabled="true"
                 android:layout_width="match_parent"
@@ -126,7 +125,6 @@
                 android:layout_marginStart="16dp"/>
 
         <com.google.android.material.button.MaterialButton
-                style="@style/MaterialButtonStyleFill"
                 android:id="@+id/btnLogin"
                 android:text="@string/btnLogin"
                 android:layout_width="240dp"
