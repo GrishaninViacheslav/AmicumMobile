@@ -5,10 +5,9 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent" android:background="#FFFFFF">
 
-    <EditText
+    <TextView
             android:layout_width="392dp"
             android:layout_height="101dp"
-            android:inputType="textPersonName"
             android:text="@string/splash_top_text"
             tools:text="@string/splash_top_text"
             android:ems="10"
@@ -18,13 +17,14 @@
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="@color/black"
             android:gravity="center"
+            android:background="@color/white"
             android:textSize="@dimen/lblTopSplash" android:autofillHints=""/>
-    <EditText
+    <TextView
             android:layout_width="334dp"
             android:layout_height="100dp"
-            android:inputType="textPersonName"
             android:text='@string/splash_bottom_text'
             android:ems="10"
+            android:background="@color/white"
             android:id="@+id/editTextTextPersonName2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,6 +33,7 @@
             android:gravity="center"
             android:textSize="@dimen/lblBottomSplash" android:autofillHints=""/>
     <ImageView
+            android:contentDescription="@string/logo_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/splash_logo"

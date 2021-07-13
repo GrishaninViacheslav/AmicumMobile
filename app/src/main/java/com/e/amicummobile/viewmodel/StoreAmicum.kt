@@ -3,6 +3,8 @@ package com.e.amicummobile.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.e.amicummobile.config.Bootstrap
+import com.e.amicummobile.config.Const
 import com.e.amicummobile.controller.Assistant
 import com.e.amicummobile.modelAmicum.ConfigToRequest
 import com.e.amicummobile.modelAmicum.IRepository
@@ -21,12 +23,17 @@ class StoreAmicum(
 
     // STATE
     private val userSession: MutableLiveData<UserSession> = MutableLiveData(),
-    private val repositoryImpl: IRepository = RepositoryImpl()
+    private val repositoryImpl: IRepository = RepositoryImpl(),
+    private var statusAuthorization: Boolean = false                                                                    // статус авторизации
 
 ) : ViewModel() {
 
     // GETTER
-    fun getUserSession() = userSession
+    fun getUserSession() =
+        userSession                                                                                  // получение объекта сессии
+
+    fun getStatusAuthorization() =
+        statusAuthorization                                                                  // получение статуса авторизации
 
     // ACTION
 
@@ -40,8 +47,13 @@ class StoreAmicum(
             "storeAmicum.getLogin",
             "login: " + login + " pwd: " + pwd + " typeAuthorization: " + typeAuthorization
         )
-        var statusAutorization = false
-        val payload: UserAutorizationActionLoginRequest = UserAutorizationActionLoginRequest(
+        statusAuthorization = false
+
+        if (login == "1" && pwd == "1" && Bootstrap.TYPE_BUILD == Const.VERSION_DEBUG) {                                 // TODO отладочный костыль убрать в релизе
+            statusAuthorization = true
+        }
+
+        val payload = UserAutorizationActionLoginRequest(
             login = login,
             password = pwd,
             activeDirectoryFlag = typeAuthorization
@@ -49,7 +61,7 @@ class StoreAmicum(
 
         val jsonString: String = Assistant.toJson(payload)
 
-        val config: ConfigToRequest = ConfigToRequest(
+        val config = ConfigToRequest(
             "UserAutorization",
             "actionLogin",
             "",
@@ -57,7 +69,7 @@ class StoreAmicum(
         )
         repositoryImpl.getData(config)
 
-        return statusAutorization
+        return statusAuthorization
     }
 
     data class UserAutorizationActionLoginRequest(
@@ -70,11 +82,11 @@ class StoreAmicum(
      * Метод проверки наличия авторизации пользователя на сервере
      */
     fun checkUserSession(): Boolean {
-        var statusSession: Boolean = false;
+        var statusSession = false
         if (userSession.value != null && userSession.value?.workerId != -1) {
-            statusSession = true;
+            statusSession = true
         }
-        return statusSession;
+        return statusSession
     }
 
 

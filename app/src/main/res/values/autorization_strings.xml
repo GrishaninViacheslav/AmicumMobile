@@ -3,7 +3,7 @@
     <string name="btnCloseApplication">ВЫХОД</string>
     <string name="lblEntryInSystem">ВХОД В СИСТЕМУ</string>
     <string name="lblWelcome">Добро пожаловать\nАвторизуйтесь, чтобы продолжить</string>
-    <string name="hintLogin">Введите логин</string>
+    <string name="hintLogin">Логин</string>
     <string name="hintPwd">Введите пароль</string>
     <string name="lblLogin">Логин</string>
     <string name="lblPwd">Пароль</string>

@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.e.amicummobile.R
 import com.e.amicummobile.databinding.AuthorizationFragmentBinding
 import com.e.amicummobile.viewmodel.StoreAmicum
 
@@ -36,35 +36,53 @@ class AuthorizationFragment : Fragment() {
         binding.btnCloseApplication.setOnClickListener {                                                                // обработка нажания кнопки закрыть
             closeApp()
         }
-        binding.btnLogin.setOnClickListener {                                                                           // обработчик кнопки авторизации
-            var statusCheckField: Boolean = true
-            binding.lblMessage.text = ""
 
+        binding.txtLogin.addTextChangedListener {                                                                       // сброс вывода ошибки при начале ввода текста в поле логина
+            binding.layoutLogin.error = null
+        }
+
+        binding.txtPwd.addTextChangedListener {                                                                         // сброс вывода ошибки при начале ввода текста в поле пароля
+            binding.layoutPwd.error = null
+        }
+
+        binding.btnLogin.setOnClickListener {                                                                           // обработчик кнопки авторизации
+            var statusCheckField =
+                true                                                                                 // статус проверки полей авторизации
+            val statusAuthorization: Boolean                                                                            // статус авторизации
+
+            // делаем проверку на пустое поле пароля, если оно пустое, то красим выводим ошибку
             if (binding.txtPwd.text?.isEmpty() == true) {
                 statusCheckField = false
-                binding.lblMessage.text = getString(R.string.emptyPwd)
-                binding.txtPwd.setBackgroundResource(R.drawable.field_rounded_red)
+                binding.layoutPwd.error = "Пароль не может быть пустым!"
             } else {
-                binding.txtPwd.setBackgroundResource(R.drawable.field_rounded)
+                binding.layoutPwd.error = null
             }
 
-            if (binding.txtLogin.text.isEmpty()) {
+            // делаем проверку на пустое поле логина, если оно пустое, то красим выводим ошибку
+            if (binding.txtLogin.text?.isEmpty() == true) {
                 statusCheckField = false
-                binding.lblMessage.text = getString(R.string.emptyLogin)
-                binding.txtLogin.setBackgroundResource(R.drawable.field_rounded_red)
+                binding.layoutLogin.error = "Логин не может быть пустым!"
             } else {
-                binding.txtLogin.setBackgroundResource(R.drawable.field_rounded)
+                binding.layoutLogin.error = null
             }
 
+            // выполняем авторизацию
             if (statusCheckField) {
-                storeAmicum.getLogin(
+                statusAuthorization = storeAmicum.getLogin(
                     binding.txtLogin.text.toString(),
                     binding.txtPwd.text.toString(),
                     binding.checkBox.isChecked
                 )
-//                binding.lblMessage.text = getString(R.string.wrongLoginPwd)
-//                binding.txtLogin.setBackgroundResource(R.drawable.field_rounded_red)
-//                binding.txtPwd.setBackgroundResource(R.drawable.field_rounded_red)
+
+                if (!statusAuthorization) {
+                    binding.layoutLogin.error = "Логин неверный!"
+                    binding.layoutPwd.error = "Пароль неверный!"
+                } else {
+                    binding.layoutLogin.error = null
+                    binding.layoutPwd.error = null
+                    parentFragmentManager.beginTransaction().remove(this).commitNow()
+                }
+
             }
         }
     }
