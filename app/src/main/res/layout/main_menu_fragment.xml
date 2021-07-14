@@ -17,46 +17,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             <!-- Your contents -->
-
-            <com.google.android.material.appbar.AppBarLayout
+            <FrameLayout
+                    android:id="@+id/containerAppBar"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                    <com.google.android.material.button.MaterialButton
-                            style="@style/MaterialButtonStyleAppBarTopBackground"
-                            android:layout_height="match_parent"
-                            android:drawableLeft="@drawable/icon_menu"
-                            android:id="@+id/materialButton"
-                            app:layout_constraintStart_toStartOf="parent" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:textSize="19sp"
-                            android:textColor="@color/white"
-                            android:text="Amicum mobile"
-                            app:layout_constraintEnd_toStartOf="@+id/materialButton2"
-                            app:layout_constraintStart_toEndOf="@+id/materialButton" />
-
-                    <com.google.android.material.button.MaterialButton
-                            style="@style/MaterialButtonStyleAppBarTopBackground"
-                            android:layout_height="match_parent"
-                            android:text="@null"
-                            android:drawableLeft="@drawable/icon_with_notification_white"
-                            android:id="@+id/materialButton2"
-                            app:layout_constraintEnd_toEndOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.appbar.AppBarLayout>
+                    app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
                     android:text="OPEN_MAIN_MENU"
@@ -69,6 +36,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:padding="0dp" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.navigation.NavigationView
