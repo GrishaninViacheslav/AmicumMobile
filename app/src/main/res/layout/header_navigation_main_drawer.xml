@@ -8,23 +8,31 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="105dp"
+            android:layout_height="wrap_content"
             android:background="@color/actionModeBackground">
+
+        <Space
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:id="@+id/space"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
                 style="@style/MainMenuStyle"
-                android:layout_width="match_parent"
                 android:id="@+id/tvFIOWorker"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
                 android:gravity="center|start"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 tools:text="1452221 | Иванов И.И. Горный мастер"
                 android:layout_marginEnd="100dp"
-                android:layout_height="match_parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/space" />
 
         <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -33,9 +41,10 @@
                 android:layout_margin="5dp"
                 android:elevation="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvFIOWorker">
+                app:layout_constraintStart_toEndOf="@+id/tvFIOWorker"
+                android:foregroundGravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/space">
 
             <ImageView
                     android:id="@+id/imgPhotoWorker"
@@ -45,12 +54,13 @@
                     android:contentDescription="@string/WorkerPhoto" />
         </androidx.cardview.widget.CardView>
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="535dp"
+            android:layout_height="505dp"
 
             android:baselineAligned="false">
 
