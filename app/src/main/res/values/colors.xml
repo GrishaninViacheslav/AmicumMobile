@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="strokeColor">#598D9B</color>
     <color name="actionModeBackground">#6A7180</color>
+    <color name="app_bar_layout">#6A7180</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#B55A6E</color>
 </resources>

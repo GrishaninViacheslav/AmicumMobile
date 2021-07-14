@@ -33,7 +33,7 @@
                 android:layout_marginStart="16dp"
                 android:contentDescription="@string/smallLogo"/>
         <com.google.android.material.button.MaterialButton
-                style="@style/MaterialButtonStyleNoBackground"
+                style="@style/MaterialButtonStyleWhiteBackground"
                 android:id="@+id/btnCloseApplication"
                 android:text="@string/btnCloseApplication"
                 android:layout_width="89dp"
