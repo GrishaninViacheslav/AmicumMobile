@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), IAppBarTopMain {
         }
     }
 
-    override fun openSettings(string: String) {
+    override fun openMainMenu(string: String) {
 
     }
 

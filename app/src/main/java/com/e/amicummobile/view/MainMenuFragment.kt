@@ -32,7 +32,7 @@ class MainMenuFragment : Fragment(), IAppBarTopMain {
         super.onViewCreated(view, savedInstanceState)
         storeAmicum = ViewModelProvider(this).get(StoreAmicum::class.java)
         binding.openMainMenu.setOnClickListener {                                                                // обработка нажания кнопки закрыть
-            binding.drawerMainMenu.openDrawer(GravityCompat.START)
+            openMainMenu("Открыть главное меню")
         }
         initFragment()                                                                              // инициализируем фрагмент
 
@@ -59,7 +59,7 @@ class MainMenuFragment : Fragment(), IAppBarTopMain {
     /**
      * открытие главного меню
      */
-    override fun openSettings(string: String) {
+    override fun openMainMenu(string: String) {
         binding.drawerMainMenu.openDrawer(GravityCompat.START)
     }
 

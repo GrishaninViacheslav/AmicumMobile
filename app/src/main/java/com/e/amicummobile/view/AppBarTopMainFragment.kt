@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.amicummobile.databinding.AppBarTopMainFragmentBinding
@@ -34,12 +33,12 @@ class AppBarTopMainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         storeAmicum = ViewModelProvider(this).get(StoreAmicum::class.java)
-        binding.btnAppBarSettings.setOnClickListener {                                                                // обработка нажания кнопки закрыть
+        binding.btnAppBarMainMenu.setOnClickListener {                                                                // обработка нажания кнопки закрыть
             Log.println(Log.INFO, "AppBarTopMainFragment.onViewCreated", "Нажал настройка")
             if (parentFragment is MainMenuFragment) {
-                (parentFragment as MainMenuFragment).openSettings("Открыть главную панель")
+                (parentFragment as MainMenuFragment).openMainMenu("Открыть главную панель")
             }
-            mCallback!!.openSettings("Открыть главную панель")
+            mCallback!!.openMainMenu("Открыть главную панель")
         }
     }
 
