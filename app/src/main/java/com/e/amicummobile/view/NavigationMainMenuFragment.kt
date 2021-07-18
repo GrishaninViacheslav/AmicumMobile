@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.e.amicummobile.R
 import com.e.amicummobile.databinding.HeaderNavigationMainDrawerBinding
-import com.e.amicummobile.databinding.NavigationMainMenuFragmentBinding
+import com.e.amicummobile.interfaces.IAppMainMenu
 import com.e.amicummobile.viewmodel.StoreAmicum
 
 /**

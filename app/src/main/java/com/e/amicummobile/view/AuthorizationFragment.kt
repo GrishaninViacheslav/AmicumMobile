@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.e.amicummobile.MainActivity
 import com.e.amicummobile.config.Bootstrap
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.AuthorizationFragmentBinding
+import com.e.amicummobile.interfaces.IAppMain
 import com.e.amicummobile.viewmodel.StoreAmicum
 
 /**

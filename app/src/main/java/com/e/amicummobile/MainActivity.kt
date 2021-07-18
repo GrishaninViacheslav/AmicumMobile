@@ -6,6 +6,9 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.e.amicummobile.databinding.ActivityMainBinding
+import com.e.amicummobile.interfaces.IAppBarTopMain
+import com.e.amicummobile.interfaces.IAppMain
+import com.e.amicummobile.interfaces.IAppMainMenu
 import com.e.amicummobile.view.*
 import com.e.amicummobile.viewmodel.StoreAmicum
 

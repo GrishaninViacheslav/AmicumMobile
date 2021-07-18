@@ -1,8 +1,10 @@
-package com.e.amicummobile.view
+package com.e.amicummobile.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.e.amicummobile.view.GroupNotificationFragment
+import com.e.amicummobile.view.PersonalNotificationFragment
 import java.lang.IllegalStateException
 
 
