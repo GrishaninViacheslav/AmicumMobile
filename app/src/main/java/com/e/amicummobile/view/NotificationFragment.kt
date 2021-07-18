@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.amicummobile.R
@@ -34,6 +33,10 @@ class NotificationFragment : Fragment() {
         storeAmicum = ViewModelProvider(this).get(StoreAmicum::class.java)
 
         initFragment()                                                                              // инициализируем фрагмент
+
+        val groupNotification = binding.tabNotifications.getTabAt(0)?.orCreateBadge
+        groupNotification!!.setVisible(true)
+        groupNotification!!.number = 100
 
     }
 
