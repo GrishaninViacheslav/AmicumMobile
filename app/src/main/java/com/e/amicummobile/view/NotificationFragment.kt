@@ -34,9 +34,14 @@ class NotificationFragment : Fragment() {
 
         initFragment()                                                                              // инициализируем фрагмент
 
-        val groupNotification = binding.tabNotifications.getTabAt(0)?.orCreateBadge
+        val tabNotifications = binding.tabNotifications
+        val groupNotification = tabNotifications.getTabAt(0)?.orCreateBadge
         groupNotification!!.setVisible(true)
         groupNotification!!.number = 100
+        groupNotification!!.maxCharacterCount = 2
+
+        binding.vpNotificationsFragment.adapter = vpNotificationAdapter(childFragmentManager)
+        tabNotifications.setupWithViewPager(binding.vpNotificationsFragment)
 
     }
 
