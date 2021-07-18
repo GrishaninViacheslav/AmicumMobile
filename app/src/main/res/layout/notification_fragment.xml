@@ -24,17 +24,34 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-            <Button
-                    android:text="OPEN_NOTIFICATION"
-                    android:stateListAnimator="@null"
-                    android:layout_width="wrap_content"
+
+            <com.google.android.material.tabs.TabLayout
+                    android:layout_width="409dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/openMainMenu"
+                    app:layout_constraintTop_toBottomOf="@+id/containerAppBar"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    tools:padding="0dp" />
+                    android:id="@+id/tabNotification">
+
+                <com.google.android.material.tabs.TabItem
+                        android:id="@+id/tabGroupNotification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/groupNotification" />
+
+                <com.google.android.material.tabs.TabItem
+                        android:id="@+id/tabPersonalNotification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/personalNotification" />
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/containerNotification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tabNotification"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
