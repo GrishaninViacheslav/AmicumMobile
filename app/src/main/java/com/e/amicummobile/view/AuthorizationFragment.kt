@@ -1,5 +1,6 @@
 package com.e.amicummobile.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.e.amicummobile.MainActivity
 import com.e.amicummobile.config.Bootstrap
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.AuthorizationFragmentBinding
@@ -22,6 +24,7 @@ class AuthorizationFragment : Fragment() {
 
     private lateinit var storeAmicum: StoreAmicum                                                                       // центральное хранилище приложения
 
+    private var mCallback: IAppMain? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,6 +86,7 @@ class AuthorizationFragment : Fragment() {
                     binding.layoutLogin.error = null
                     binding.layoutPwd.error = null
                     parentFragmentManager.beginTransaction().remove(this).commitNow()
+                    mCallback!!.initApp("Init")                                                   // Инициализируем приложение
                 }
 
             }
@@ -104,6 +108,11 @@ class AuthorizationFragment : Fragment() {
      */
     private fun closeApp() {
         activity?.finishAffinity()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mCallback = context as IAppMain
     }
 
 }

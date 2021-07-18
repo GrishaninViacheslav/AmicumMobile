@@ -19,4 +19,14 @@ object Const {
         2                                                                                           // версия опытная/проверка качества
     const val VERSION_DEBUG =
         2                                                                                         // версия тестовая
+
+    // тип заголовка приложения (верхний бар)
+    const val APP_BAR_MAIN =
+        1                                                                      // бар на главной странице
+    const val APP_BAR_SECOND =
+        2                                                                    // бар на вспомогательных фрагментах
+    const val APP_BAR_MODAL =
+        3                                                                     // бар в модальных фрагментах
+    const val APP_BAR_ONLY_BACK =
+        4                                                                 // бар только c кнопкой назад
 }

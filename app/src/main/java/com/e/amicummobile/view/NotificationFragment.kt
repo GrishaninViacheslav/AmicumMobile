@@ -9,15 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.amicummobile.R
 import com.e.amicummobile.config.Const
-import com.e.amicummobile.databinding.MainMenuFragmentBinding
+import com.e.amicummobile.databinding.NotificationFragmentBinding
 import com.e.amicummobile.viewmodel.StoreAmicum
 
 /**
- * Главное меню системы АМИКУМ
+ * Уведомления
  */
-class MainMenuFragment : Fragment() {
+class NotificationFragment : Fragment() {
 
-    private var _binding: MainMenuFragmentBinding? = null
+    private var _binding: NotificationFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var storeAmicum: StoreAmicum
 
@@ -25,7 +25,7 @@ class MainMenuFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = MainMenuFragmentBinding.inflate(inflater, container, false)
+        _binding = NotificationFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -44,8 +44,8 @@ class MainMenuFragment : Fragment() {
         childFragmentManager.beginTransaction()                                                    // загружаем AppBarTop                                                                 // поверх открываем всплывающее окно, которое закроется через 5 секунд
             .add(
                 R.id.containerAppBar, AppBarTopMainFragment.newInstance(
-                    "Amicum_mobile",
-                    Const.APP_BAR_MAIN,
+                    "Уведомления",
+                    Const.APP_BAR_ONLY_BACK,
                     "",
                     ""
                 )
@@ -59,6 +59,8 @@ class MainMenuFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = MainMenuFragment()
+        fun newInstance() = NotificationFragment()
     }
+
+
 }
