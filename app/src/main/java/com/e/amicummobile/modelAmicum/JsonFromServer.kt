@@ -3,15 +3,16 @@ package com.e.amicummobile.modelAmicum
 /**
  * Модель данных приходящих с сервера
  */
-class JsonFromServer {
-    lateinit var Items: ArrayList<String>                                                                               // полезная нагрузка
-    lateinit var errors: ArrayList<String>                                                                              // массив ошибок
-    lateinit var debug: ArrayList<String>                                                                               // массив отладочной информации
-    lateinit var debugData: ArrayList<String>                                                                           // массив отладочных данных
-    var status: Int = 0                                                                                                 // статус выполнения метода на сервере
 
-
-
-
-
+class JsonFromServer<T>(
+    var Items: T,                                                                                   // полезная нагрузка
+    var errors: Any,                                                                                // массив ошибок
+    var debug: Any,                                                                                 // массив отладочной информации
+    var debugData: Any,                                                                             // массив отладочных данных
+    var status: Int = 0                                                                             // статус выполнения метода на сервере
+) {
+    @JvmName("getItems1")
+    fun getItems(): T {
+        return Items
+    }
 }

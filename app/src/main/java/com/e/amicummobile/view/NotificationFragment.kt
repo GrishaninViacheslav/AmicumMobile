@@ -31,15 +31,18 @@ class NotificationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        storeAmicum = ViewModelProvider(this).get(StoreAmicum::class.java)
+
+        storeAmicum = ViewModelProvider(requireActivity()).get(StoreAmicum::class.java)
+
+        storeAmicum.getNotification(storeAmicum.getUserSession().value?.userCompanyId)             // получить уведомления пользователя с сервера
 
         initFragment()                                                                              // инициализируем фрагмент
 
         val tabNotifications = binding.tabNotifications
         val groupNotification = tabNotifications.getTabAt(0)?.orCreateBadge
         groupNotification!!.setVisible(true)
-        groupNotification!!.number = 100
-        groupNotification!!.maxCharacterCount = 2
+        groupNotification.number = 100
+        groupNotification.maxCharacterCount = 2
 
         binding.vpNotificationsFragment.adapter = vpNotificationAdapter(childFragmentManager)
         tabNotifications.setupWithViewPager(binding.vpNotificationsFragment)

@@ -22,7 +22,7 @@ class AuthorizationFragment : Fragment() {
     private var _binding: AuthorizationFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var storeAmicum: StoreAmicum                                                                       // центральное хранилище приложения
+    private lateinit var storeAmicum: StoreAmicum                                                   // центральное хранилище приложения
 
     private var mCallback: IAppMain? = null
 
@@ -36,24 +36,23 @@ class AuthorizationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        storeAmicum =
-            ViewModelProvider(this).get(StoreAmicum::class.java)                                                  // подключаем центрально хранилище
-        binding.btnCloseApplication.setOnClickListener {                                                                // обработка нажания кнопки закрыть
+        storeAmicum = ViewModelProvider(requireActivity()).get(StoreAmicum::class.java)                    // подключаем центрально хранилище
+
+        binding.btnCloseApplication.setOnClickListener {                                            // обработка нажания кнопки закрыть
             closeApp()
         }
 
-        binding.txtLogin.addTextChangedListener {                                                                       // сброс вывода ошибки при начале ввода текста в поле логина
+        binding.txtLogin.addTextChangedListener {                                                   // сброс вывода ошибки при начале ввода текста в поле логина
             binding.layoutLogin.error = null
         }
 
-        binding.txtPwd.addTextChangedListener {                                                                         // сброс вывода ошибки при начале ввода текста в поле пароля
+        binding.txtPwd.addTextChangedListener {                                                     // сброс вывода ошибки при начале ввода текста в поле пароля
             binding.layoutPwd.error = null
         }
 
-        binding.btnLogin.setOnClickListener {                                                                           // обработчик кнопки авторизации
-            var statusCheckField =
-                true                                                                                 // статус проверки полей авторизации
-            val statusAuthorization: Boolean                                                                            // статус авторизации
+        binding.btnLogin.setOnClickListener {                                                       // обработчик кнопки авторизации
+            var statusCheckField = true                                                             // статус проверки полей авторизации
+            val statusAuthorization: Boolean                                                        // статус авторизации
 
             // делаем проверку на пустое поле пароля, если оно пустое, то красим выводим ошибку
             if (binding.txtPwd.text?.isEmpty() == true) {

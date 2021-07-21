@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.e.amicummobile.config.Bootstrap
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.controller.Assistant
-import com.e.amicummobile.modelAmicum.ConfigToRequest
-import com.e.amicummobile.modelAmicum.IRepository
-import com.e.amicummobile.modelAmicum.RepositoryImpl
-import com.e.amicummobile.modelAmicum.UserSession
+import com.e.amicummobile.modelAmicum.*
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonObject
+import com.google.gson.reflect.TypeToken
 
 
 /**
@@ -22,18 +22,17 @@ import com.google.gson.GsonBuilder
 class StoreAmicum(
 
     // STATE
-    private val userSession: MutableLiveData<UserSession> = MutableLiveData(),
+    private var userSession: MutableLiveData<UserSession> = MutableLiveData(),
     private val repositoryImpl: IRepository = RepositoryImpl(),
-    private var statusAuthorization: Boolean = false                                                                    // статус авторизации
+    private var statusAuthorization: Boolean = false,                                               // статус авторизации
+    private var notificationAll: MutableLiveData<NotificationAll> = MutableLiveData(),              // список уведомлений пользователя
 
 ) : ViewModel() {
 
     // GETTER
-    fun getUserSession() =
-        userSession                                                                                  // получение объекта сессии
-
-    fun getStatusAuthorization() =
-        statusAuthorization                                                                  // получение статуса авторизации
+    fun getUserSession() = userSession                                                              // получение объекта сессии
+    fun getStatusAuthorization() = statusAuthorization                                              // получение статуса авторизации
+    fun getNotificationAll() = notificationAll                                                      // получение уведомлений пользователя
 
     // ACTION
 
@@ -68,11 +67,49 @@ class StoreAmicum(
             "",
             jsonString
         )
-        repositoryImpl.getData(config)
+        val response = repositoryImpl.getData(config)
+
+        class Token : TypeToken<JsonFromServer<UserSession>>()
+
+        val temp: JsonFromServer<UserSession> = Gson().fromJson(response, Token().type)
+
+        userSession = MutableLiveData(temp.getItems())
 
         return statusAuthorization
     }
 
+
+    /**
+     * Метод получения всех уведомлений
+     */
+    fun getNotification(companyId: Int?): MutableLiveData<NotificationAll> {
+        Log.println(Log.INFO, "storeAmicum.getNotification", "Запрос уведомлений на сервере")
+        Log.println(Log.INFO, "storeAmicum.getNotification", "companyId: " + companyId)
+
+        val payload = NotificationAllRequest(
+            company_id = companyId
+        )
+
+        val jsonString: String = Assistant.toJson(payload)
+
+        val config = ConfigToRequest(
+            "notification\\Notification",
+            "GetNotificationAll",
+            "",
+            jsonString
+        )
+        val response = repositoryImpl.getData(config)
+
+        notificationAll = MutableLiveData(GsonBuilder().create().fromJson(response, NotificationAll::class.java))
+
+        Log.println(Log.INFO, "storeAmicum.getNotification", "Закончил выполнение: ")
+
+        return notificationAll
+    }
+
+    /**
+     * класс запроса авторизации пользователя
+     */
     data class UserAutorizationActionLoginRequest(
         val login: String,
         val password: String,
@@ -80,11 +117,40 @@ class StoreAmicum(
     )
 
     /**
+     * класс запроса уведомлений
+     */
+    data class NotificationAllRequest(
+        val company_id: Int?
+    )
+
+    /**
+     * Класс уведомлений по всем направления
+     */
+    data class NotificationAll(
+        val medicalExam: Map<String, NotificationMedicalExamWorker>,   // запланированный медицинский осмотр по подразделению
+    )
+
+    /**
+     * Класс уведомления по запланированному медицинскому осмотру работника
+     */
+    data class NotificationMedicalExamWorker(
+        val worker_id: Int,                     // ключ работника
+        val worker_full_name: String,           // ФИО
+        val worker_staff_number: String,        // табельный номер работника
+        val worker_position_title: String,      // должность
+        val checkup_date_start: String,         // дата начала медосмотра
+        val checkup_date_end: String,           // дата окончания медосмотра
+        val flag: Boolean,                      // true  - если до окончания срока медосмотра осталось 2 недели или менее, то возвращается ораньжевый цвет. false - иначе срок замены просрочен, то возвращается красный цвет. null  - во всех остальных случаях
+        val status_id: Int,                     // статус уведомления (прочитан-19 или нет-1)
+    )
+
+
+    /**
      * Метод проверки наличия авторизации пользователя на сервере
      */
     fun checkUserSession(): Boolean {
         var statusSession = false
-        if (userSession.value != null && userSession.value?.workerId != -1) {
+        if (userSession.value != null && userSession.value?.worker_id != -1) {
             statusSession = true
         }
         return statusSession
