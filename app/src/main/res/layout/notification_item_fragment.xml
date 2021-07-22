@@ -22,11 +22,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tvFIOMedical"
+                app:layout_constraintEnd_toStartOf="@+id/tvFirstField"
                 android:layout_marginEnd="8dp" />
 
         <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvFIOMedical"
+                android:id="@+id/tvFirstField"
                 style="@style/Notification.TextViewLeft"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
         <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvDateStartEnd"
+                android:id="@+id/tvSecondField"
                 style="@style/Notification.TextViewRight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

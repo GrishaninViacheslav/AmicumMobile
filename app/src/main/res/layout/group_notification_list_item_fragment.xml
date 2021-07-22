@@ -13,7 +13,7 @@
             style="@style/NotificationListItem">
 
         <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/imageNotificationIcon"
                 android:src="@drawable/notification_medical"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
@@ -29,7 +29,7 @@
                 android:layout_height="30dp"
 
                 tools:text="Запланирован медицинский осмотр"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/imageNotificationIcon"
                 app:layout_constraintTop_toTopOf="parent" />
 
         <!--    Список уведомлений-->

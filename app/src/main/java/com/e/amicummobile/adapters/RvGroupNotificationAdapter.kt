@@ -1,6 +1,7 @@
 package com.e.amicummobile.adapters
 
 import android.content.Context
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +11,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.e.amicummobile.R
 import com.e.amicummobile.modelAmicum.Notification
 import com.e.amicummobile.modelAmicum.NotificationList
+import com.google.android.material.imageview.ShapeableImageView
 
 class RvGroupNotificationAdapter(private val notificationList: ArrayList<NotificationList<Notification>>) :
     RecyclerView.Adapter<RvGroupNotificationAdapter.GroupNotificationHolder>() {
 
     class GroupNotificationHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var imageNotificationIcon: ShapeableImageView? = null
         var notificationTitle: TextView? = null
         var rvNotificationItem: RecyclerView? = null
         var context: Context? = null
 
         init {
             context = itemView.context
+            imageNotificationIcon = itemView.findViewById(R.id.imageNotificationIcon)
             notificationTitle = itemView.findViewById(R.id.notification_title)
             rvNotificationItem = itemView.findViewById(R.id.rvNotificationItem)
         }
@@ -38,7 +42,11 @@ class RvGroupNotificationAdapter(private val notificationList: ArrayList<Notific
 
         holder.rvNotificationItem?.layoutManager = LinearLayoutManager(holder.context)
 
-        holder.rvNotificationItem?.adapter = RvNotificationAdapter(notificationList[position].notifications)
+        holder.rvNotificationItem?.adapter = RvNotificationAdapter(notificationList[position].notifications, notificationList[position].id)
+        when (notificationList[position].id) {
+            "medicalExam" -> holder.imageNotificationIcon?.setImageResource(R.drawable.notification_medical)
+            "siz" -> holder.imageNotificationIcon?.setImageResource(R.drawable.notification_siz)
+        }
     }
 
     override fun getItemCount(): Int {
