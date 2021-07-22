@@ -5,7 +5,7 @@
         android:layout_height="match_parent">
 
 
-    <!-- Your contents -->
+    <!-- AppBar -->
     <FrameLayout
             android:id="@+id/containerAppBar"
             android:layout_width="match_parent"
@@ -14,6 +14,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+    <!--    Табыл блока уведомлений-->
     <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,6 +35,7 @@
 
     </com.google.android.material.tabs.TabLayout>
 
+    <!--    Переключалка вложенных фрагментов групповые/личные-->
     <androidx.viewpager.widget.ViewPager
             android:id="@+id/vpNotificationsFragment"
             android:layout_width="match_parent"

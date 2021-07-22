@@ -21,6 +21,7 @@ class NotificationFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var storeAmicum: StoreAmicum
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,15 +35,14 @@ class NotificationFragment : Fragment() {
 
         storeAmicum = ViewModelProvider(requireActivity()).get(StoreAmicum::class.java)
 
-        storeAmicum.getNotification(storeAmicum.getUserSession().value?.userCompanyId)             // получить уведомления пользователя с сервера
-
         initFragment()                                                                              // инициализируем фрагмент
 
+        initObserve()                                                                               // инициализируем наблюдателей за обновлением данных в локальном хранилище
+
+        // Заполнение вкладок уведомлений бэйджиками
         val tabNotifications = binding.tabNotifications
-        val groupNotification = tabNotifications.getTabAt(0)?.orCreateBadge
-        groupNotification!!.setVisible(true)
-        groupNotification.number = 100
-        groupNotification.maxCharacterCount = 2
+
+        setGroupNotificationBadge(getNotificationAllSize(storeAmicum.getNotificationAll().value))
 
         binding.vpNotificationsFragment.adapter = vpNotificationAdapter(childFragmentManager)
         tabNotifications.setupWithViewPager(binding.vpNotificationsFragment)
@@ -50,9 +50,49 @@ class NotificationFragment : Fragment() {
     }
 
     /**
+     * Метод инициализации наблюдателей за изменением данных
+     */
+    private fun initObserve() {
+        storeAmicum.getNotificationAll().observe(viewLifecycleOwner, {
+            setGroupNotificationBadge(getNotificationAllSize(it))
+        })
+    }
+
+    /**
+     * Метод расчета количества уведомлений
+     */
+    private fun getNotificationAllSize(notificationAll: StoreAmicum.NotificationAll?): Int {
+        var sizeNotification = 0
+        if (notificationAll?.medicalExam != null) {
+            sizeNotification += notificationAll.medicalExam.size
+        }
+
+        return sizeNotification
+    }
+
+    /**
+     * Заполнение вкладки группового уведомления бэйджиком
+     */
+    private fun setGroupNotificationBadge(sizeBadge: Int = 0) {
+        val tabNotifications = binding.tabNotifications
+        val groupNotification = tabNotifications.getTabAt(0)?.orCreateBadge
+
+        if (sizeBadge > 0) {
+            groupNotification!!.setVisible(true)
+            groupNotification.maxCharacterCount = 3
+            groupNotification.number = sizeBadge
+        } else {
+            groupNotification!!.setVisible(false)
+        }
+    }
+
+    /**
      * Метод инициализации фрагмента
      */
     private fun initFragment() {
+
+        storeAmicum.getNotification(storeAmicum.getUserSession().value?.userCompanyId)             // получить уведомления пользователя с сервера
+
         childFragmentManager.beginTransaction()                                                    // загружаем AppBarTop                                                                 // поверх открываем всплывающее окно, которое закроется через 5 секунд
             .add(
                 R.id.containerAppBar, AppBarTopMainFragment.newInstance(

@@ -100,7 +100,11 @@ class StoreAmicum(
         )
         val response = repositoryImpl.getData(config)
 
-        notificationAll = MutableLiveData(GsonBuilder().create().fromJson(response, NotificationAll::class.java))
+        class Token : TypeToken<JsonFromServer<NotificationAll>>()
+
+        val temp: JsonFromServer<NotificationAll> = Gson().fromJson(response, Token().type)
+
+        notificationAll = MutableLiveData(temp.getItems())
 
         Log.println(Log.INFO, "storeAmicum.getNotification", "Закончил выполнение: ")
 
