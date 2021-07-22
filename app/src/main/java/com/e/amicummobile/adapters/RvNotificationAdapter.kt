@@ -16,6 +16,7 @@ class RvNotificationAdapter(private val notification: ArrayList<Notification>, p
         var tvFirstField: TextView? = null
         var tvSecondField: TextView? = null
         var viewNotificationStatus: View? = null
+        var viewNotificationLine: View? = null
         var context: Context? = null
 
         init {
@@ -23,6 +24,7 @@ class RvNotificationAdapter(private val notification: ArrayList<Notification>, p
             tvFirstField = itemView.findViewById(R.id.tvFirstField)
             tvSecondField = itemView.findViewById(R.id.tvSecondField)
             viewNotificationStatus = itemView.findViewById(R.id.viewNotificationStatus)
+            viewNotificationLine = itemView.findViewById(R.id.viewNotificationLine)
         }
     }
 
@@ -52,6 +54,10 @@ class RvNotificationAdapter(private val notification: ArrayList<Notification>, p
                 holder.tvSecondField?.text = notification[position].worker_full_name + " | " + notification[position].worker_staff_number
                 holder.tvSecondField?.textSize = 14f
             }
+        }
+
+        if (position == notification.size - 1) {
+            holder.viewNotificationLine?.visibility = View.GONE
         }
     }
 
