@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.e.amicummobile.R
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.e.amicummobile.adapters.RvGroupNotificationAdapter
+import com.e.amicummobile.databinding.GroupNotificationFragmentBinding
+import com.e.amicummobile.viewmodel.StoreAmicum
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +25,9 @@ class GroupNotificationFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var _binding: GroupNotificationFragmentBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var storeAmicum: StoreAmicum
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +40,21 @@ class GroupNotificationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.group_notification_fragment, container, false)
+    ): View {
+        _binding = GroupNotificationFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        storeAmicum = ViewModelProvider(requireActivity()).get(StoreAmicum::class.java)
+
+        val rvGroupNotification = binding.rvGroupNotification
+        rvGroupNotification.layoutManager = LinearLayoutManager(requireContext())
+
+        rvGroupNotification.adapter = RvGroupNotificationAdapter(storeAmicum.getNotificationAll().value!!)
+
     }
 
     companion object {

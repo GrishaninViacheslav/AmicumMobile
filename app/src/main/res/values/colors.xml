@@ -8,7 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="strokeColor">#598D9B</color>
     <color name="actionModeBackground">#6A7180</color>
+    <color name="notificationListBackground">#F5F5F5</color>
+    <color name="notificationTitle">#B55A6E</color>
     <color name="app_bar_layout">#6A7180</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#B55A6E</color>
+    <color name="notification_status_expired">#B55A6E</color>
+    <color name="notification_status_planned">#EF7F1A</color>
+    <color name="notification_status_null">#fff</color>
+    <color name="NotificationLineDivision">#DADADA</color>
 </resources>

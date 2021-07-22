@@ -8,8 +8,6 @@ import com.e.amicummobile.config.Const
 import com.e.amicummobile.controller.Assistant
 import com.e.amicummobile.modelAmicum.*
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 
 
@@ -25,7 +23,7 @@ class StoreAmicum(
     private var userSession: MutableLiveData<UserSession> = MutableLiveData(),
     private val repositoryImpl: IRepository = RepositoryImpl(),
     private var statusAuthorization: Boolean = false,                                               // статус авторизации
-    private var notificationAll: MutableLiveData<NotificationAll> = MutableLiveData(),              // список уведомлений пользователя
+    private var notificationAll: MutableLiveData<ArrayList<NotificationList<Notification>>> = MutableLiveData(),              // список уведомлений пользователя
 
 ) : ViewModel() {
 
@@ -82,7 +80,7 @@ class StoreAmicum(
     /**
      * Метод получения всех уведомлений
      */
-    fun getNotification(companyId: Int?): MutableLiveData<NotificationAll> {
+    fun getNotification(companyId: Int?): MutableLiveData<ArrayList<NotificationList<Notification>>> {
         Log.println(Log.INFO, "storeAmicum.getNotification", "Запрос уведомлений на сервере")
         Log.println(Log.INFO, "storeAmicum.getNotification", "companyId: " + companyId)
 
@@ -100,9 +98,9 @@ class StoreAmicum(
         )
         val response = repositoryImpl.getData(config)
 
-        class Token : TypeToken<JsonFromServer<NotificationAll>>()
+        class Token : TypeToken<JsonFromServer<ArrayList<NotificationList<Notification>>>>()
 
-        val temp: JsonFromServer<NotificationAll> = Gson().fromJson(response, Token().type)
+        val temp: JsonFromServer<ArrayList<NotificationList<Notification>>> = Gson().fromJson(response, Token().type)
 
         notificationAll = MutableLiveData(temp.getItems())
 
@@ -126,28 +124,6 @@ class StoreAmicum(
     data class NotificationAllRequest(
         val company_id: Int?
     )
-
-    /**
-     * Класс уведомлений по всем направления
-     */
-    data class NotificationAll(
-        val medicalExam: Map<String, NotificationMedicalExamWorker>,   // запланированный медицинский осмотр по подразделению
-    )
-
-    /**
-     * Класс уведомления по запланированному медицинскому осмотру работника
-     */
-    data class NotificationMedicalExamWorker(
-        val worker_id: Int,                     // ключ работника
-        val worker_full_name: String,           // ФИО
-        val worker_staff_number: String,        // табельный номер работника
-        val worker_position_title: String,      // должность
-        val checkup_date_start: String,         // дата начала медосмотра
-        val checkup_date_end: String,           // дата окончания медосмотра
-        val flag: Boolean,                      // true  - если до окончания срока медосмотра осталось 2 недели или менее, то возвращается ораньжевый цвет. false - иначе срок замены просрочен, то возвращается красный цвет. null  - во всех остальных случаях
-        val status_id: Int,                     // статус уведомления (прочитан-19 или нет-1)
-    )
-
 
     /**
      * Метод проверки наличия авторизации пользователя на сервере

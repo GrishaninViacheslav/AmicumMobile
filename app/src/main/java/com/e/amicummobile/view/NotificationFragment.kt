@@ -10,6 +10,8 @@ import com.e.amicummobile.R
 import com.e.amicummobile.adapters.vpNotificationAdapter
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.NotificationFragmentBinding
+import com.e.amicummobile.modelAmicum.Notification
+import com.e.amicummobile.modelAmicum.NotificationList
 import com.e.amicummobile.viewmodel.StoreAmicum
 
 /**
@@ -35,17 +37,9 @@ class NotificationFragment : Fragment() {
 
         storeAmicum = ViewModelProvider(requireActivity()).get(StoreAmicum::class.java)
 
-        initFragment()                                                                              // инициализируем фрагмент
+        initFragment(view)                                                                          // инициализируем фрагмент
 
         initObserve()                                                                               // инициализируем наблюдателей за обновлением данных в локальном хранилище
-
-        // Заполнение вкладок уведомлений бэйджиками
-        val tabNotifications = binding.tabNotifications
-
-        setGroupNotificationBadge(getNotificationAllSize(storeAmicum.getNotificationAll().value))
-
-        binding.vpNotificationsFragment.adapter = vpNotificationAdapter(childFragmentManager)
-        tabNotifications.setupWithViewPager(binding.vpNotificationsFragment)
 
     }
 
@@ -61,10 +55,12 @@ class NotificationFragment : Fragment() {
     /**
      * Метод расчета количества уведомлений
      */
-    private fun getNotificationAllSize(notificationAll: StoreAmicum.NotificationAll?): Int {
+    private fun getNotificationAllSize(notificationList: ArrayList<NotificationList<Notification>>?): Int {
         var sizeNotification = 0
-        if (notificationAll?.medicalExam != null) {
-            sizeNotification += notificationAll.medicalExam.size
+        if (notificationList != null) {
+            for (notificationListItem in notificationList) {
+                sizeNotification += notificationListItem.notifications.size
+            }
         }
 
         return sizeNotification
@@ -89,11 +85,11 @@ class NotificationFragment : Fragment() {
     /**
      * Метод инициализации фрагмента
      */
-    private fun initFragment() {
+    private fun initFragment(view: View) {
 
         storeAmicum.getNotification(storeAmicum.getUserSession().value?.userCompanyId)             // получить уведомления пользователя с сервера
 
-        childFragmentManager.beginTransaction()                                                    // загружаем AppBarTop                                                                 // поверх открываем всплывающее окно, которое закроется через 5 секунд
+        childFragmentManager.beginTransaction()                                                    // загружаем AppBarTop
             .add(
                 R.id.containerAppBar, AppBarTopMainFragment.newInstance(
                     "Уведомления",
@@ -103,6 +99,14 @@ class NotificationFragment : Fragment() {
                 )
             )
             .commitNow()
+
+        val tabNotifications = binding.tabNotifications                                             // инициализация ViewPager и привязка его к табам
+        binding.vpNotificationsFragment.adapter = vpNotificationAdapter(childFragmentManager)
+        tabNotifications.setupWithViewPager(binding.vpNotificationsFragment)
+
+
+        setGroupNotificationBadge(getNotificationAllSize(storeAmicum.getNotificationAll().value))   // Заполнение вкладок уведомлений бэйджиками
+
     }
 
     override fun onDestroyView() {

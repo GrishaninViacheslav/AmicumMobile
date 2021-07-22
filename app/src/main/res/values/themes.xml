@@ -90,5 +90,32 @@
         <item name="android:background">@color/app_bar_layout</item>
     </style>
 
+    <style name="NotificationListItem" parent="ThemeAmicumMobile">
+        <item name="android:layout_gravity">left</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:elevation">10dp</item>
+        <item name="android:background">@drawable/fragment_rounded_shadow</item>
+    </style>
+
+    <style name="NotificationList.Title" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center|start</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/notificationTitle</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+
+    <style name="Notification.TextViewLeft" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center|start</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Notification.TextViewRight" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center|end</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 
 </resources>
