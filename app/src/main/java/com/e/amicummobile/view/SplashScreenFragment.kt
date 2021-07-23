@@ -1,13 +1,18 @@
 package com.e.amicummobile.view
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.e.amicummobile.R
 
 import com.e.amicummobile.databinding.SplashScreenFragmentBinding
 
@@ -37,6 +42,14 @@ class SplashScreenFragment : Fragment() {
         val alphaStart = 0.3f
         val alphaEnd = 1f
         val durationAnimation = 1500L
+
+        val spannable = SpannableString(view.context.getString(R.string.splash_bottom_text))
+        spannable.setSpan(
+            ForegroundColorSpan(Color.BLACK),
+            0, 4,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        tvBottomTextView.text = spannable
 
         createAnimation(imgLogoSplash, alphaStart, alphaEnd, durationAnimation)                     // центральный лого
         createAnimation(tvTopTextView, alphaStart, alphaEnd, durationAnimation)                     // верхняя строчка
