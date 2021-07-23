@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.e.amicummobile.R
+import com.e.amicummobile.controller.Assistant.convertDateToFront
 import com.e.amicummobile.modelAmicum.Notification
 
 class RvNotificationAdapter(private val notification: ArrayList<Notification>, private val notification_id: String) : RecyclerView.Adapter<RvNotificationAdapter.NotificationHolder>
@@ -47,12 +48,36 @@ class RvNotificationAdapter(private val notification: ArrayList<Notification>, p
         when (notification_id) {
             "medicalExam" -> {
                 holder.tvFirstField?.text = notification[position].worker_full_name + " | " + notification[position].worker_staff_number
-                holder.tvSecondField?.text = notification[position].checkup_date_start + " - " + notification[position].checkup_date_start
+                holder.tvSecondField?.text = convertDateToFront(notification[position].checkup_date_start) + " - " + convertDateToFront(notification[position].checkup_date_start)
             }
             "siz" -> {
                 holder.tvFirstField?.text = notification[position].siz_title
                 holder.tvSecondField?.text = notification[position].worker_full_name + " | " + notification[position].worker_staff_number
                 holder.tvSecondField?.textSize = 14f
+            }
+            "ppkPab" -> {
+                holder.tvFirstField?.text = notification[position].worker_full_name + " | " + notification[position].worker_staff_number
+                holder.tvSecondField?.text = convertDateToFront(notification[position].ppk_date_time)
+            }
+            "audit" -> {
+                holder.tvFirstField?.text = notification[position].audit_place_title
+                holder.tvSecondField?.text = convertDateToFront(notification[position].audit_date_time)
+            }
+            "check_knowledge" -> {
+                holder.tvFirstField?.text = notification[position].worker_full_name + " | " + notification[position].worker_staff_number
+                holder.tvSecondField?.text = convertDateToFront(notification[position].check_knowledge_date_time)
+            }
+            "briefing" -> {
+                holder.tvFirstField?.text = notification[position].worker_full_name + " | " + notification[position].worker_staff_number
+                holder.tvSecondField?.text = convertDateToFront(notification[position].briefing_date_time)
+            }
+            "ppkInjunction" -> {
+                var ppk_id_temp = "№ " + notification[position].injunction_id + "(" + notification[position].ppk_id + ")"
+                if (notification[position].ppk_id > 0) {
+                    ppk_id_temp += "(ППК ПАБ: " + notification[position].ppk_id + ")"
+                }
+                holder.tvFirstField?.text = ppk_id_temp
+                holder.tvSecondField?.text = convertDateToFront(notification[position].ppk_date_time)
             }
         }
 

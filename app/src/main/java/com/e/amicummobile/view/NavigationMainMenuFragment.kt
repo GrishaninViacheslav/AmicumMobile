@@ -34,7 +34,7 @@ class NavigationMainMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        storeAmicum = ViewModelProvider(this).get(StoreAmicum::class.java)
+        storeAmicum = ViewModelProvider(requireActivity()).get(StoreAmicum::class.java)
 
         binding.btnMainMenuOnMain.setOnClickListener {                                              // обработка нажания кнопки перейти на главный фрагмент
             mCallback!!.openFragment("MainFragment")
@@ -43,6 +43,11 @@ class NavigationMainMenuFragment : Fragment() {
         binding.btnMainMenuNotifications.setOnClickListener {                                       // обработка нажания кнопки открыть уведомления
             mCallback!!.openFragment("NotificationFragment")
         }
+
+        binding.tvFIOWorker.text =
+            storeAmicum.getUserSession().value?.userStaffNumber + " | " + storeAmicum.getUserSession().value?.userName + " \n " + storeAmicum.getUserSession()
+                .value?.position_title
+        binding.tvCompanyWorker.text = storeAmicum.getUserSession().value?.userDepartmentPath
 
     }
 

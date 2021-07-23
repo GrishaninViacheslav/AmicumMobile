@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/actionModeBackground">
-
-        <Space
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:id="@+id/space"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="0dp"
+            android:background="@color/actionModeBackground"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/guideline8"
+            android:id="@+id/constraintLayout2">
 
         <com.google.android.material.textview.MaterialTextView
                 style="@style/MainMenuStyle"
@@ -32,7 +26,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/space" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -44,7 +38,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvFIOWorker"
                 android:foregroundGravity="center"
-                app:layout_constraintTop_toBottomOf="@+id/space">
+                app:layout_constraintTop_toTopOf="@+id/tvFIOWorker"
+                android:layout_marginTop="8dp">
 
             <ImageView
                     android:id="@+id/imgPhotoWorker"
@@ -57,12 +52,22 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline8"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="90dp" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="505dp"
+            android:layout_height="0dp"
 
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:id="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+            app:layout_constraintBottom_toTopOf="@+id/guideline9">
 
         <com.google.android.material.textview.MaterialTextView
                 style="@style/MainMenuStyle"
@@ -117,14 +122,29 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/btnMainMenuCalcMaterials" />
 
+        <androidx.constraintlayout.widget.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline10"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="10dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline11"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
         <View
                 android:id="@+id/divider"
-                android:layout_width="250dp"
+                android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintBottom_toBottomOf="@+id/btnMainMenuCalcStops"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="@+id/guideline10"
+
+                app:layout_constraintEnd_toStartOf="@+id/guideline11" />
 
         <com.google.android.material.button.MaterialButton
                 style="@style/MaterialButtonStyleMainMenu"
@@ -149,24 +169,33 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline9"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline9">
 
 
         <com.google.android.material.button.MaterialButton
                 style="@style/MaterialButtonStyleMainMenu"
                 android:id="@+id/btnMainMenuExit"
+                android:textColor="@color/red"
                 android:text="@string/lblExit"
                 android:gravity="center|start"
                 android:layout_width="match_parent"
                 android:drawableEnd="@drawable/icon_exit"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="10dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

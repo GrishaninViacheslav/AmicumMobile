@@ -46,6 +46,11 @@ class RvGroupNotificationAdapter(private val notificationList: ArrayList<Notific
         when (notificationList[position].id) {
             "medicalExam" -> holder.imageNotificationIcon?.setImageResource(R.drawable.notification_medical)
             "siz" -> holder.imageNotificationIcon?.setImageResource(R.drawable.notification_siz)
+            "ppkPab" -> holder.imageNotificationIcon?.setImageResource(R.drawable.notification_pab)
+            "audit" -> holder.imageNotificationIcon?.setImageResource(R.drawable.notification_audit)
+            "check_knowledge" -> holder.imageNotificationIcon?.setImageResource(R.drawable.notification_check_knowledge)
+            "briefing" -> holder.imageNotificationIcon?.setImageResource(R.drawable.notification_briefing)
+            "ppkInjunction" -> holder.imageNotificationIcon?.setImageResource(R.drawable.notification_injunction)
         }
     }
 
