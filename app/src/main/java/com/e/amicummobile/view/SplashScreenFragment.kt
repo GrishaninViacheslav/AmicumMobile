@@ -30,10 +30,35 @@ class SplashScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val imgLogoSplash = binding.imgLogoSplash
+        val tvTopTextView = binding.tvTopTextView
+        val tvBottomTextView = binding.tvBottomTextView
+
+        val alphaStart = 0.3f
+        val alphaEnd = 1f
+        val durationAnimation = 1500L
+
+        createAnimation(imgLogoSplash, alphaStart, alphaEnd, durationAnimation)                     // центральный лого
+        createAnimation(tvTopTextView, alphaStart, alphaEnd, durationAnimation)                     // верхняя строчка
+        createAnimation(tvBottomTextView, alphaStart, alphaEnd, durationAnimation)                  // нижняя строчка
+
+
         Handler(Looper.getMainLooper()).postDelayed({
             parentFragmentManager.beginTransaction().remove(this).commitNow()
         }, 3000)
     }
+
+    /**
+     * Метод установки анимации на элементы заставки
+     */
+    fun createAnimation(element: View, alphaStart: Float, alphaEnd: Float, durationAnimation: Long) {
+        element.setAlpha(alphaStart)
+        element.animate()
+            .alpha(alphaEnd)
+            .setDuration(durationAnimation)
+            .setListener(null)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
