@@ -51,8 +51,8 @@ class SplashScreenFragment : Fragment() {
     /**
      * Метод установки анимации на элементы заставки
      */
-    fun createAnimation(element: View, alphaStart: Float, alphaEnd: Float, durationAnimation: Long) {
-        element.setAlpha(alphaStart)
+    private fun createAnimation(element: View, alphaStart: Float, alphaEnd: Float, durationAnimation: Long) {
+        element.alpha = alphaStart
         element.animate()
             .alpha(alphaEnd)
             .setDuration(durationAnimation)

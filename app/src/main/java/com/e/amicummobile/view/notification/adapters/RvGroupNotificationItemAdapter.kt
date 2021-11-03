@@ -38,9 +38,9 @@ class RvGroupNotificationItemAdapter(private val notification: ArrayList<Notific
     }
 
     override fun onBindViewHolder(holder: NotificationHolder, position: Int) {
-        if (notification[position].flag == true) {
+        if (notification[position].flag) {
             holder.viewNotificationStatus?.setBackgroundResource(R.drawable.status_notification_color_true)
-        } else if (notification[position].flag == false) {
+        } else if (!notification[position].flag) {
             holder.viewNotificationStatus?.setBackgroundResource(R.drawable.status_notification_color_false)
         } else {
             holder.viewNotificationStatus?.setBackgroundResource(R.drawable.status_notification_color_null)
@@ -74,11 +74,11 @@ class RvGroupNotificationItemAdapter(private val notification: ArrayList<Notific
             }
             "ppkInjunction" -> {
                 val ppkPab = holder.context?.getText(R.string.ppkPab).toString()
-                var ppk_id_temp = "№ " + notification[position].injunction_id + "(" + notification[position].ppk_id + ")"
+                var ppkIdTemp = "№ " + notification[position].injunction_id + "(" + notification[position].ppk_id + ")"
                 if (notification[position].ppk_id > 0) {
-                    ppk_id_temp += ppkPab + " " + notification[position].ppk_id + ")"
+                    ppkIdTemp += ppkPab + " " + notification[position].ppk_id + ")"
                 }
-                holder.tvFirstField?.text = ppk_id_temp
+                holder.tvFirstField?.text = ppkIdTemp
                 holder.tvSecondField?.text = convertDateToFront(notification[position].ppk_date_time)
             }
         }

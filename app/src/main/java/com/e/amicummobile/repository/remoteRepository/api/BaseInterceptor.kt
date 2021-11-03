@@ -1,4 +1,4 @@
-package geekbrains.ru.translator.model.data.api
+package com.e.amicummobile.repository.remoteRepository.api
 
 import okhttp3.Interceptor
 import okhttp3.Response

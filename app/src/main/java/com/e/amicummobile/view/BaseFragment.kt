@@ -11,7 +11,7 @@ abstract class BaseFragment<T> : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        storeAmicum = ViewModelProvider(requireActivity()).get(StoreAmicum::class.java)             // подключаем центрально хранилище
+        storeAmicum = ViewModelProvider(requireActivity())[StoreAmicum::class.java]             // подключаем центрально хранилище
     }
 
 

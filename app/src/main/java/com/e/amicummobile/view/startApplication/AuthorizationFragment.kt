@@ -105,7 +105,7 @@ class AuthorizationFragment : BaseFragment<UserSession>() {
     }
 
 
-    fun renderData(userSession: UserSession?) {
+    private fun renderData(userSession: UserSession?) {
         if (userSession == null) {
             showErrorScreen(getString(R.string.empty_server_response_on_success))
             binding.layoutLogin.error = " "

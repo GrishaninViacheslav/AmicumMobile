@@ -26,16 +26,14 @@ object Assistant {
     }
 
     fun convertDateToFront(dateFromBack: String, withTime: Boolean = false): String {
-        val formatterFrom: DateTimeFormatter                                                        // шаблон для преобразования из строки в дату
-        when (withTime) {
-            false -> formatterFrom = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            true -> formatterFrom = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        val formatterFrom: DateTimeFormatter = when (withTime) {                                    // шаблон для преобразования из строки в дату
+            false -> DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            true -> DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         }
 
-        val formatterTo: DateTimeFormatter                                                          // шаблон для преобразования даты в нужный формат
-        when (withTime) {
-            false -> formatterTo = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-            true -> formatterTo = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
+        val formatterTo: DateTimeFormatter = when (withTime) {                                      // шаблон для преобразования даты в нужный формат
+            false -> DateTimeFormatter.ofPattern("dd.MM.yyyy")
+            true -> DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
         }
 
         return LocalDate.parse(dateFromBack, formatterFrom).format(formatterTo)

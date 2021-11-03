@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.AppBarTopMainFragmentBinding
-import com.e.amicummobile.view.menu.IAppMainMenu
 import com.e.amicummobile.viewmodel.StoreAmicum
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

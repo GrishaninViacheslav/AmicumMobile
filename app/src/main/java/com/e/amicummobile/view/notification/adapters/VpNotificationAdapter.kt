@@ -8,7 +8,7 @@ import com.e.amicummobile.view.notification.PersonalNotificationFragment
 import java.lang.IllegalStateException
 
 
-class vpNotificationAdapter(fragmentManager: FragmentManager) :
+class VpNotificationAdapter(fragmentManager: FragmentManager) :
     FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
 
@@ -24,7 +24,7 @@ class vpNotificationAdapter(fragmentManager: FragmentManager) :
         return 2
     }
 
-    override fun getPageTitle(position: Int): CharSequence? =
+    override fun getPageTitle(position: Int): CharSequence =
         when (position) {
             0 -> "Групповые"
             1 -> "Личные"

@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.e.amicummobile.R
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.MainMenuFragmentBinding
-import com.e.amicummobile.view.menu.AppBarTopMainFragment
 import com.e.amicummobile.viewmodel.StoreAmicum
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

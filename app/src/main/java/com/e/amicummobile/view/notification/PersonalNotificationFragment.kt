@@ -40,7 +40,7 @@ class PersonalNotificationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = PersonalNotificationFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -48,7 +48,7 @@ class PersonalNotificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        storeAmicum = ViewModelProvider(requireActivity()).get(StoreAmicum::class.java)
+        storeAmicum = ViewModelProvider(requireActivity())[StoreAmicum::class.java]
 
         val rvPersonalNotification = binding.rvPersonalNotification
         rvPersonalNotification.layoutManager = LinearLayoutManager(requireContext())

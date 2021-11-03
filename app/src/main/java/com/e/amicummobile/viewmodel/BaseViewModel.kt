@@ -1,7 +1,6 @@
 package com.e.amicummobile.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.e.amicummobile.modelAmicum.ConfigToRequest
 import kotlinx.coroutines.*
 
 abstract class BaseViewModel : ViewModel() {

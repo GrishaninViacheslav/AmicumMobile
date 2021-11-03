@@ -36,9 +36,9 @@ class RvPersonalNotificationItemAdapter(private val notification: ArrayList<Noti
     }
 
     override fun onBindViewHolder(holder: NotificationHolder, position: Int) {
-        if (notification[position].flag == true) {
+        if (notification[position].flag) {
             holder.viewNotificationStatus?.setBackgroundResource(R.drawable.status_notification_color_true)
-        } else if (notification[position].flag == false) {
+        } else if (!notification[position].flag) {
             holder.viewNotificationStatus?.setBackgroundResource(R.drawable.status_notification_color_false)
         } else {
             holder.viewNotificationStatus?.setBackgroundResource(R.drawable.status_notification_color_null)

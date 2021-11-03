@@ -45,7 +45,7 @@ class StoreAmicum(
         Log.println(
             Log.INFO,
             "storeAmicum.getLogin",
-            "login: " + login + " pwd: " + pwd + " typeAuthorization: " + typeAuthorization
+            "login: $login pwd: $pwd typeAuthorization: $typeAuthorization"
         )
 
         val payload = UserAutorizationActionLoginRequest(
@@ -75,7 +75,7 @@ class StoreAmicum(
      */
     fun getNotification(companyId: Int?): MutableLiveData<ArrayList<NotificationList<Notification>>> {
         Log.println(Log.INFO, "storeAmicum.getNotification", "Запрос уведомлений на сервере")
-        Log.println(Log.INFO, "storeAmicum.getNotification", "companyId: " + companyId)
+        Log.println(Log.INFO, "storeAmicum.getNotification", "companyId: $companyId")
 
         val payload = NotificationAllRequest(
             company_id = companyId
@@ -155,7 +155,5 @@ class StoreAmicum(
         )
     }
 
-    override fun onCleared() {
-        super.onCleared()
-    }
+
 }

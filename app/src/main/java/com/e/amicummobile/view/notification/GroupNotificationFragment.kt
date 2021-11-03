@@ -48,7 +48,7 @@ class GroupNotificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        storeAmicum = ViewModelProvider(requireActivity()).get(StoreAmicum::class.java)
+        storeAmicum = ViewModelProvider(requireActivity())[StoreAmicum::class.java]
 
         val rvGroupNotification = binding.rvGroupNotification
         rvGroupNotification.layoutManager = LinearLayoutManager(requireContext())

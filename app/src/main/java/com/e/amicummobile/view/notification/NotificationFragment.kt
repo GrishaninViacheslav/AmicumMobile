@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.amicummobile.R
-import com.e.amicummobile.view.notification.adapters.vpNotificationAdapter
+import com.e.amicummobile.view.notification.adapters.VpNotificationAdapter
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.NotificationFragmentBinding
 import com.e.amicummobile.modelAmicum.Notification
@@ -36,7 +36,7 @@ class NotificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        storeAmicum = ViewModelProvider(requireActivity()).get(StoreAmicum::class.java)
+        storeAmicum = ViewModelProvider(requireActivity())[StoreAmicum::class.java]
 
         initFragment(view)                                                                          // инициализируем фрагмент
 
@@ -75,11 +75,11 @@ class NotificationFragment : Fragment() {
         val groupNotification = tabNotifications.getTabAt(0)?.orCreateBadge
 
         if (sizeBadge > 0) {
-            groupNotification!!.setVisible(true)
+            groupNotification!!.isVisible = true
             groupNotification.maxCharacterCount = 3
             groupNotification.number = sizeBadge
         } else {
-            groupNotification!!.setVisible(false)
+            groupNotification!!.isVisible = false
         }
     }
 
@@ -102,7 +102,7 @@ class NotificationFragment : Fragment() {
             .commitNow()
 
         val tabNotifications = binding.tabNotifications                                             // инициализация ViewPager и привязка его к табам
-        binding.vpNotificationsFragment.adapter = vpNotificationAdapter(childFragmentManager)
+        binding.vpNotificationsFragment.adapter = VpNotificationAdapter(childFragmentManager)
         tabNotifications.setupWithViewPager(binding.vpNotificationsFragment)
 
 

@@ -4,8 +4,8 @@ import com.e.amicummobile.config.Bootstrap
 import com.e.amicummobile.modelAmicum.*
 import com.e.amicummobile.repository.IRepository
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import geekbrains.ru.translator.model.data.api.ApiService
-import geekbrains.ru.translator.model.data.api.BaseInterceptor
+import com.e.amicummobile.repository.remoteRepository.api.ApiService
+import com.e.amicummobile.repository.remoteRepository.api.BaseInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitImpl : IRepository {
     override suspend fun getData(configToRequest: ConfigToRequest): String {
 
-        return getService(BaseInterceptor.interceptor).getNotification(configToRequest).await()              // Добавляем suspend и .await()
+        return getService(BaseInterceptor.interceptor).getNotificationAsync(configToRequest).await()              // Добавляем suspend и .await()
     }
 
     private fun getService(interceptor: Interceptor): ApiService {
