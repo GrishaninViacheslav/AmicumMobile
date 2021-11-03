@@ -12,10 +12,10 @@ import com.e.amicummobile.modelAmicum.Notification
 import com.e.amicummobile.modelAmicum.NotificationList
 import com.google.android.material.imageview.ShapeableImageView
 
-class RvGroupNotificationAdapter(private val notificationList: ArrayList<NotificationList<Notification>>) :
-    RecyclerView.Adapter<RvGroupNotificationAdapter.GroupNotificationHolder>() {
+class RvPersonalNotificationAdapter(private val notificationList: ArrayList<NotificationList<Notification>>) :
+    RecyclerView.Adapter<RvPersonalNotificationAdapter.PersonalNotificationHolder>() {
 
-    class GroupNotificationHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class PersonalNotificationHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imageNotificationIcon: ShapeableImageView? = null
         var notificationTitle: TextView? = null
         var rvNotificationItem: RecyclerView? = null
@@ -29,19 +29,19 @@ class RvGroupNotificationAdapter(private val notificationList: ArrayList<Notific
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupNotificationHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonalNotificationHolder {
         val itemView =
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.group_notification_list_item_fragment, parent, false)
-        return GroupNotificationHolder(itemView)
+                .inflate(R.layout.personal_notification_list_item_fragment, parent, false)
+        return PersonalNotificationHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: GroupNotificationHolder, position: Int) {
+    override fun onBindViewHolder(holder: PersonalNotificationHolder, position: Int) {
         holder.notificationTitle?.text = notificationList[position].title
 
         holder.rvNotificationItem?.layoutManager = LinearLayoutManager(holder.context)
 
-        holder.rvNotificationItem?.adapter = RvGroupNotificationItemAdapter(notificationList[position].notifications, notificationList[position].id)
+        holder.rvNotificationItem?.adapter = RvPersonalNotificationItemAdapter(notificationList[position].notifications, notificationList[position].id)
         when (notificationList[position].id) {
             "medicalExam" -> holder.imageNotificationIcon?.setImageResource(R.drawable.notification_medical)
             "siz" -> holder.imageNotificationIcon?.setImageResource(R.drawable.notification_siz)

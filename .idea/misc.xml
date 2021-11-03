@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="Android API 30 Platform" project-jdk-type="Android SDK" />
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/[Git] Repos/AmicumMobile/app/src/main/res/layout/group_notification_fragment.xml" value="0.1197398622800306" />
+        <entry key="..\:/[Git] Repos/AmicumMobile/app/src/main/res/layout/header_navigation_main_drawer.xml" value="0.23203125" />
+        <entry key="..\:/[Git] Repos/AmicumMobile/app/src/main/res/layout/navigation_main_menu_fragment.xml" value="0.23203125" />
+        <entry key="..\:/[Git] Repos/AmicumMobile/app/src/main/res/layout/personal_notification_item_fragment.xml" value="0.406640625" />
+        <entry key="..\:/[Git] Repos/AmicumMobile/app/src/main/res/layout/personal_notification_list_item_fragment.xml" value="0.33" />
+        <entry key="..\:/[Git] Repos/AmicumMobile/app/src/main/res/layout/splash_screen_fragment.xml" value="0.23203125" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android API 30 Platform" project-jdk-type="Android SDK" />
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>

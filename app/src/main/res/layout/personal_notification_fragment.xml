@@ -5,10 +5,13 @@
         android:layout_height="match_parent"
         tools:context=".view.PersonalNotificationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--    Список уведомлений-->
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPersonalNotification"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Личные" />
+            android:background="@color/notificationListBackground"
+            tools:listitem="@layout/personal_notification_list_item_fragment"
+            tools:itemCount="5" />
 
 </FrameLayout>

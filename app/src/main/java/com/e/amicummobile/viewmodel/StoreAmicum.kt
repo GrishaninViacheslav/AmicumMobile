@@ -2,13 +2,15 @@ package com.e.amicummobile.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.e.amicummobile.config.Bootstrap
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.controller.Assistant
+import com.e.amicummobile.interactor.MainInteractor
 import com.e.amicummobile.modelAmicum.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 /**
@@ -20,36 +22,31 @@ import com.google.gson.reflect.TypeToken
 class StoreAmicum(
 
     // STATE
+    private val interactor: MainInteractor,
     private var userSession: MutableLiveData<UserSession> = MutableLiveData(),
-    private val repositoryImpl: IRepository = RepositoryImpl(),
-    private var statusAuthorization: Boolean = false,                                               // статус авторизации
     private var notificationAll: MutableLiveData<ArrayList<NotificationList<Notification>>> = MutableLiveData(),              // список уведомлений пользователя
 
-) : ViewModel() {
+) : BaseViewModel() {
 
     // GETTER
     fun getUserSession() = userSession                                                              // получение объекта сессии
-    fun getStatusAuthorization() = statusAuthorization                                              // получение статуса авторизации
-    fun getNotificationAll() = notificationAll                                                      // получение уведомлений пользователя
+    fun getNotificationAll() = notificationAll                                                      // получение всех уведомлений пользователя
+    fun getNotificationPersonal(): MutableLiveData<ArrayList<NotificationList<Notification>>> {     // получение персональных уведомлений пользователя
+        return notificationAll
+    }
 
     // ACTION
 
     /**
      * Метод авторизации пользователя на сервер и получения сессионных данных о нем
      */
-    fun getLogin(login: String, pwd: String, typeAuthorization: Boolean): Boolean {
+    fun getLogin(login: String, pwd: String, typeAuthorization: Boolean) {
         Log.println(Log.INFO, "storeAmicum.getLogin", "Запрос авторизации на сервере")
         Log.println(
             Log.INFO,
             "storeAmicum.getLogin",
             "login: " + login + " pwd: " + pwd + " typeAuthorization: " + typeAuthorization
         )
-        statusAuthorization = false
-
-//        if (login == "1" && pwd == "1" && Bootstrap.TYPE_BUILD == Const.VERSION_DEBUG) {                                 // TODO отладочный костыль убрать в релизе
-        if (Bootstrap.TYPE_BUILD == Const.VERSION_DEBUG) {
-            statusAuthorization = true
-        }
 
         val payload = UserAutorizationActionLoginRequest(
             login = login,
@@ -65,15 +62,11 @@ class StoreAmicum(
             "",
             jsonString
         )
-        val response = repositoryImpl.getData(config)
 
-        class Token : TypeToken<JsonFromServer<UserSession>>()
-
-        val temp: JsonFromServer<UserSession> = Gson().fromJson(response, Token().type)
-
-        userSession = MutableLiveData(temp.getItems())
-
-        return statusAuthorization
+        cancelJob()
+        viewModelCoroutineScope.launch {
+            requestSession(config, Const.TEST_REQUEST_METHOD)
+        }
     }
 
 
@@ -96,13 +89,10 @@ class StoreAmicum(
             "",
             jsonString
         )
-        val response = repositoryImpl.getData(config)
 
-        class Token : TypeToken<JsonFromServer<ArrayList<NotificationList<Notification>>>>()
+        cancelJob()
+        viewModelCoroutineScope.launch { requestNotification(config, Const.TEST_REQUEST_METHOD) }
 
-        val temp: JsonFromServer<ArrayList<NotificationList<Notification>>> = Gson().fromJson(response, Token().type)
-
-        notificationAll = MutableLiveData(temp.getItems())
 
         Log.println(Log.INFO, "storeAmicum.getNotification", "Закончил выполнение: ")
 
@@ -136,5 +126,36 @@ class StoreAmicum(
         return statusSession
     }
 
+    private suspend fun requestSession(configToRequest: ConfigToRequest, isOnline: String) =
+        withContext(Dispatchers.IO) {
+            class Token : TypeToken<JsonFromServer<UserSession>>()
 
+            val response = interactor.getData(configToRequest, isOnline)
+            val temp: JsonFromServer<UserSession> = Gson().fromJson(response, Token().type)
+            userSession.postValue(temp.getItems())
+        }
+
+
+    private suspend fun requestNotification(configToRequest: ConfigToRequest, isOnline: String) =
+        withContext(Dispatchers.IO) {
+            class Token : TypeToken<JsonFromServer<ArrayList<NotificationList<Notification>>>>()
+
+            val response = interactor.getData(configToRequest, isOnline)
+            val temp: JsonFromServer<ArrayList<NotificationList<Notification>>> = Gson().fromJson(response, Token().type)
+            notificationAll.postValue(temp.getItems())
+        }
+
+
+    // Обрабатываем ошибки
+    override fun handleError(error: Throwable) {
+        Log.println(
+            Log.ERROR,
+            "storeAmicum.handleError",
+            error.message.toString()
+        )
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+    }
 }

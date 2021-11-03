@@ -12,6 +12,7 @@ import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.AppBarTopMainFragmentBinding
 import com.e.amicummobile.interfaces.IAppMainMenu
 import com.e.amicummobile.viewmodel.StoreAmicum
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val APP_BAR_TITLE = "appBarTitle"
 private const val APP_BAR_TYPE = "appBarType"
@@ -54,7 +55,8 @@ class AppBarTopMainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        storeAmicum = ViewModelProvider(this).get(StoreAmicum::class.java)
+        val viewModel: StoreAmicum by viewModel()
+        storeAmicum = viewModel
 
         binding.tvAppBarTitle.text = title
 

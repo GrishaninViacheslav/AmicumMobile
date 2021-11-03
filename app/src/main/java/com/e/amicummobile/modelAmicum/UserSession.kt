@@ -32,7 +32,7 @@ data class UserSession(
     var worker_id: Int,                          // ключ работника
     var workerObject_ids: List<Int>,             // массив ключей конкретных воркеров (подземный/поверхностный)
     var session_id: String,                      // ключ сессии
-    var worker_role: WorkerRole,           // список ролей сотрудника (id, title)
+    var worker_role: WorkerRole,                 // список ролей сотрудника (id, title)
     var socket_key: String                       // случайный ключ сессии для вебсокета
 )
 

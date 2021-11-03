@@ -53,7 +53,11 @@ class GroupNotificationFragment : Fragment() {
         val rvGroupNotification = binding.rvGroupNotification
         rvGroupNotification.layoutManager = LinearLayoutManager(requireContext())
 
-        rvGroupNotification.adapter = RvGroupNotificationAdapter(storeAmicum.getNotificationAll().value!!)
+        rvGroupNotification.adapter = storeAmicum.getNotificationAll().value?.let { RvGroupNotificationAdapter(it) }
+
+        storeAmicum.getNotificationAll().observe(viewLifecycleOwner, {
+            rvGroupNotification.adapter = RvGroupNotificationAdapter(it)
+        })
 
     }
 

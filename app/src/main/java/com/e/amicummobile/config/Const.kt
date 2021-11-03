@@ -5,9 +5,10 @@ package com.e.amicummobile.config
  */
 object Const {
     // тип запроса данных
-    const val LOCAL_REQUEST_METHOD = 1                                                              // локальные данные
-    const val SERVER_REMOTE_REQUEST_METHOD = 2                                                      // данные с внешней сети сервера
-    const val SERVER_LOCAL_REQUEST_METHOD = 3                                                       // данные с внутренней сети сервера
+    internal const val LOCAL_REQUEST_METHOD = "LOCAL_REQUEST_METHOD"                                         // локальные данные
+    internal const val SERVER_REMOTE_REQUEST_METHOD = "SERVER_REMOTE_REQUEST_METHOD"                         // данные с внешней сети сервера
+    internal const val SERVER_LOCAL_REQUEST_METHOD = "SERVER_LOCAL_REQUEST_METHOD"                           // данные с внутренней сети сервера
+    internal const val TEST_REQUEST_METHOD = "TEST_REQUEST_METHOD"                                           // данные тестовые
 
     // тип сборки проекта
     const val VERSION_PRODUCTION = 1                                                                // версия продуктив

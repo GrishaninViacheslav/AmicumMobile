@@ -1,34 +1,10 @@
-package com.e.amicummobile.modelAmicum
+package com.e.amicummobile.localRepository
 
-import android.util.Log
-import com.e.amicummobile.config.Bootstrap
-import com.e.amicummobile.config.Const
-import com.e.amicummobile.controller.Assistant.fromJson
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
+import com.e.amicummobile.modelAmicum.ConfigToRequest
+import com.e.amicummobile.modelAmicum.IRepository
 
-/**
- * Репозиторий системы, содержит три способа получения данных:
- *  - с удаленного сервера
- *  - с локального сервера
- *  - с локальной БД мобильного приложения
- *  - с тестовых данных
- */
-class RepositoryImpl : IRepository {
-
-    init {
-
-    }
-
-    override fun getDataFromRemoteServer(configToRequest: ConfigToRequest): String {
-        return ""
-    }
-
-    override fun getDataFromLocalServer(configToRequest: ConfigToRequest): String {
-        return ""
-    }
-
-    override fun getDataFromLocalStorage(configToRequest: ConfigToRequest): String =
+object TestDataRepository : IRepository {
+    override suspend fun getData(configToRequest: ConfigToRequest): String =
         when (configToRequest.method) {
             "actionLogin" -> {
 
@@ -40,19 +16,4 @@ class RepositoryImpl : IRepository {
             }
             else -> ""
         }
-
-
-    override fun getDataTest(configToRequest: ConfigToRequest): String {
-        return ""
-    }
-
-    override fun getData(configToRequest: ConfigToRequest): String =
-
-        when (Bootstrap.DEFAULT_REQUEST_METHOD) {
-            Const.LOCAL_REQUEST_METHOD -> getDataFromLocalStorage(configToRequest)
-            Const.SERVER_LOCAL_REQUEST_METHOD -> getDataFromLocalServer(configToRequest)
-            Const.SERVER_REMOTE_REQUEST_METHOD -> getDataFromRemoteServer(configToRequest)
-            else -> getDataTest(configToRequest)
-        }
-
 }

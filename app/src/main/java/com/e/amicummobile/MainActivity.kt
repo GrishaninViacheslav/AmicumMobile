@@ -3,7 +3,6 @@ package com.e.amicummobile
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.GravityCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.e.amicummobile.databinding.ActivityMainBinding
 import com.e.amicummobile.interfaces.IAppBarTopMain
@@ -11,6 +10,7 @@ import com.e.amicummobile.interfaces.IAppMain
 import com.e.amicummobile.interfaces.IAppMainMenu
 import com.e.amicummobile.view.*
 import com.e.amicummobile.viewmodel.StoreAmicum
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Главная активити системы - старт отсюда
@@ -26,8 +26,7 @@ class MainActivity : AppCompatActivity(), IAppBarTopMain, IAppMainMenu, IAppMain
         _binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        storeAmicum = ViewModelProvider(this).get(StoreAmicum::class.java)
+        initViewModel()
 
         if (savedInstanceState == null) {
             if (!storeAmicum.checkUserSession()) {
@@ -41,6 +40,11 @@ class MainActivity : AppCompatActivity(), IAppBarTopMain, IAppMainMenu, IAppMain
                 .add(R.id.container, SplashScreenFragment.newInstance())
                 .commitNow()
         }
+    }
+
+    private fun initViewModel() {
+        val viewModel: StoreAmicum by viewModel()
+        storeAmicum = viewModel
     }
 
     /**

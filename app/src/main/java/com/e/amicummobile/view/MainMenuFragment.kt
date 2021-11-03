@@ -11,6 +11,7 @@ import com.e.amicummobile.R
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.MainMenuFragmentBinding
 import com.e.amicummobile.viewmodel.StoreAmicum
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Главное меню системы АМИКУМ
@@ -31,8 +32,8 @@ class MainMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        storeAmicum = ViewModelProvider(this).get(StoreAmicum::class.java)
-
+        val viewModel: StoreAmicum by viewModel()
+        storeAmicum = viewModel
         initFragment()                                                                              // инициализируем фрагмент
 
     }

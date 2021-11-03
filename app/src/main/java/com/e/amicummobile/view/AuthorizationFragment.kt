@@ -6,23 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.e.amicummobile.R
 import com.e.amicummobile.config.Bootstrap
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.AuthorizationFragmentBinding
 import com.e.amicummobile.interfaces.IAppMain
-import com.e.amicummobile.viewmodel.StoreAmicum
+import com.e.amicummobile.modelAmicum.UserSession
 
 /**
  * Страница авторизации пользователя в системе
  */
-class AuthorizationFragment : Fragment() {
+class AuthorizationFragment : BaseFragment<UserSession>() {
 
     private var _binding: AuthorizationFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var storeAmicum: StoreAmicum                                                   // центральное хранилище приложения
 
     private var mCallback: IAppMain? = null
 
@@ -36,7 +34,10 @@ class AuthorizationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        storeAmicum = ViewModelProvider(requireActivity()).get(StoreAmicum::class.java)                    // подключаем центрально хранилище
+
+        storeAmicum.getUserSession().observe(viewLifecycleOwner, {
+            renderData(it)
+        })
 
         binding.btnCloseApplication.setOnClickListener {                                            // обработка нажания кнопки закрыть
             closeApp()
@@ -52,7 +53,6 @@ class AuthorizationFragment : Fragment() {
 
         binding.btnLogin.setOnClickListener {                                                       // обработчик кнопки авторизации
             var statusCheckField = true                                                             // статус проверки полей авторизации
-            val statusAuthorization: Boolean                                                        // статус авторизации
 
             // делаем проверку на пустое поле пароля, если оно пустое, то красим выводим ошибку
             if (binding.txtPwd.text?.isEmpty() == true) {
@@ -72,22 +72,11 @@ class AuthorizationFragment : Fragment() {
 
             // выполняем авторизацию
             if (statusCheckField || Bootstrap.TYPE_BUILD == Const.VERSION_DEBUG) {
-                statusAuthorization = storeAmicum.getLogin(
+                storeAmicum.getLogin(
                     binding.txtLogin.text.toString(),
                     binding.txtPwd.text.toString(),
                     binding.checkBox.isChecked
                 )
-
-                if (!statusAuthorization) {
-                    binding.layoutLogin.error = " "
-                    binding.layoutPwd.error = "Введены неверные логин / пароль"
-                } else {
-                    binding.layoutLogin.error = null
-                    binding.layoutPwd.error = null
-                    parentFragmentManager.beginTransaction().remove(this).commitNow()
-                    mCallback!!.initApp("Init")                                                   // Инициализируем приложение
-                }
-
             }
         }
     }
@@ -112,6 +101,38 @@ class AuthorizationFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mCallback = context as IAppMain
+    }
+
+
+    fun renderData(userSession: UserSession?) {
+        if (userSession == null) {
+            showErrorScreen(getString(R.string.empty_server_response_on_success))
+            binding.layoutLogin.error = " "
+            binding.layoutPwd.error = "Введены неверные логин / пароль"
+        } else {
+            showViewSuccess()
+            binding.layoutLogin.error = null
+            binding.layoutPwd.error = null
+            parentFragmentManager.beginTransaction().remove(this).commitNow()
+            mCallback!!.initApp("Init")                                                   // Инициализируем приложение
+        }
+    }
+
+    private fun showErrorScreen(error: String?) {
+        showViewError()
+
+    }
+
+    private fun showViewSuccess() {
+
+    }
+
+    private fun showViewLoading() {
+
+    }
+
+    private fun showViewError() {
+
     }
 
 }

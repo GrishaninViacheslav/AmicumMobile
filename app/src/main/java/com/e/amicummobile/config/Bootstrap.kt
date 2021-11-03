@@ -7,7 +7,6 @@ import com.e.amicummobile.config.Const
  */
 object Bootstrap {
     // подключение к серверу
-    var DEFAULT_REQUEST_METHOD = Const.LOCAL_REQUEST_METHOD                                         // вариант подключения
     var REMOTE_SERVER_IP = "46.181.246.234"                                                         // IP адрес внешнего сервера
     var REMOTE_SERVER_PORT = "7777"                                                                 // порт внешнего сервера
 
@@ -15,4 +14,7 @@ object Bootstrap {
     var LOCAL_SERVER_PORT = "80"                                                                    // Порт локального сервера
 
     var TYPE_BUILD = Const.VERSION_DEBUG                                                            // тип сборки (продуктив, проверка производительности, тестовая)
+
+    var DEFAULT_REQUEST_METHOD = Const.LOCAL_REQUEST_METHOD                                         // вариант подключения
+    var DEFAULT_URL_ADDRESS = REMOTE_SERVER_IP + ":" + REMOTE_SERVER_PORT                           // адрес сервера
 }
