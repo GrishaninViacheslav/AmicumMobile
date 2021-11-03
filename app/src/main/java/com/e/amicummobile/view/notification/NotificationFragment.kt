@@ -12,7 +12,7 @@ import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.NotificationFragmentBinding
 import com.e.amicummobile.modelAmicum.Notification
 import com.e.amicummobile.modelAmicum.NotificationList
-import com.e.amicummobile.view.AppBarTopMainFragment
+import com.e.amicummobile.view.menu.AppBarTopMainFragment
 import com.e.amicummobile.viewmodel.StoreAmicum
 
 /**
