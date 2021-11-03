@@ -1,4 +1,4 @@
-package com.e.amicummobile.adapters
+package com.e.amicummobile.view.notification.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

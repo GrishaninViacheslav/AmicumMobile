@@ -1,4 +1,4 @@
-package com.e.amicummobile.interfaces
+package com.e.amicummobile.view.menu
 
 interface IAppMainMenu {
     fun openMainMenu(string: String)                                                                // открыть главное меню

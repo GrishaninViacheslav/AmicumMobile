@@ -1,7 +1,7 @@
-package com.e.amicummobile.localRepository
+package com.e.amicummobile.repository.localRepository
 
 import com.e.amicummobile.modelAmicum.ConfigToRequest
-import com.e.amicummobile.modelAmicum.IRepository
+import com.e.amicummobile.repository.IRepository
 
 object TestDataRepository : IRepository {
     override suspend fun getData(configToRequest: ConfigToRequest): String =

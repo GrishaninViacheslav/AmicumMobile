@@ -3,9 +3,9 @@ package com.e.amicummobile.di
 import com.e.amicummobile.config.Const.SERVER_LOCAL_REQUEST_METHOD
 import com.e.amicummobile.config.Const.SERVER_REMOTE_REQUEST_METHOD
 import com.e.amicummobile.interactor.MainInteractor
-import com.e.amicummobile.localRepository.RoomRepository
-import com.e.amicummobile.modelAmicum.IRepository
-import com.e.amicummobile.remoteRepository.RetrofitImpl
+import com.e.amicummobile.repository.localRepository.RoomRepository
+import com.e.amicummobile.repository.IRepository
+import com.e.amicummobile.repository.remoteRepository.RetrofitImpl
 import com.e.amicummobile.viewmodel.StoreAmicum
 import org.koin.core.qualifier.named
 import org.koin.dsl.module

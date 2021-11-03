@@ -1,4 +1,4 @@
-package com.e.amicummobile.adapters
+package com.e.amicummobile.view.notification.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

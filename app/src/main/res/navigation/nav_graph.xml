@@ -6,7 +6,7 @@
 
     <fragment
             android:id="@+id/mainFragment"
-            android:name="com.e.amicummobile.view.MainMenuFragment"
+            android:name="com.e.amicummobile.view.menu.MainMenuFragment"
             android:label="mainFragment">
         <action
                 android:id="@+id/action_mainMenuFragment_to_notificationFragment2"
@@ -16,6 +16,6 @@
     </fragment>
     <fragment
             android:id="@+id/notificationFragment"
-            android:name="com.e.amicummobile.view.NotificationFragment"
+            android:name="com.e.amicummobile.view.notification.NotificationFragment"
             android:label="NotificationFragment" />
 </navigation>

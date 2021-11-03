@@ -1,4 +1,4 @@
-package com.e.amicummobile.view
+package com.e.amicummobile.view.menu
 
 import android.content.Context
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.e.amicummobile.databinding.HeaderNavigationMainDrawerBinding
-import com.e.amicummobile.interfaces.IAppMainMenu
 import com.e.amicummobile.viewmodel.StoreAmicum
 
 /**

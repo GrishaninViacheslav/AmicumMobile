@@ -1,4 +1,4 @@
-package com.e.amicummobile.view
+package com.e.amicummobile.view.menu
 
 import android.content.Context
 import android.os.Bundle
@@ -7,10 +7,9 @@ import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.AppBarTopMainFragmentBinding
-import com.e.amicummobile.interfaces.IAppMainMenu
+import com.e.amicummobile.view.menu.IAppMainMenu
 import com.e.amicummobile.viewmodel.StoreAmicum
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

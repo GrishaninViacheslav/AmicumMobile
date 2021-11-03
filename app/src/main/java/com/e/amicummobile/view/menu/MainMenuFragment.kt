@@ -1,15 +1,14 @@
-package com.e.amicummobile.view
+package com.e.amicummobile.view.menu
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.e.amicummobile.R
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.MainMenuFragmentBinding
+import com.e.amicummobile.view.AppBarTopMainFragment
 import com.e.amicummobile.viewmodel.StoreAmicum
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

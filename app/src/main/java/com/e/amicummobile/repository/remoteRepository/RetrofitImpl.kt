@@ -1,7 +1,8 @@
-package com.e.amicummobile.remoteRepository
+package com.e.amicummobile.repository.remoteRepository
 
 import com.e.amicummobile.config.Bootstrap
 import com.e.amicummobile.modelAmicum.*
+import com.e.amicummobile.repository.IRepository
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import geekbrains.ru.translator.model.data.api.ApiService
 import geekbrains.ru.translator.model.data.api.BaseInterceptor

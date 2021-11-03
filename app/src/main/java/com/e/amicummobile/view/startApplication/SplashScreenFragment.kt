@@ -1,4 +1,4 @@
-package com.e.amicummobile.view
+package com.e.amicummobile.view.startApplication
 
 import android.os.Bundle
 import android.os.Handler

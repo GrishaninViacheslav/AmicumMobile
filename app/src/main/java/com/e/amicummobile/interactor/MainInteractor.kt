@@ -1,10 +1,10 @@
 package com.e.amicummobile.interactor
 
-import com.e.amicummobile.config.Const
 import com.e.amicummobile.config.Const.LOCAL_REQUEST_METHOD
 import com.e.amicummobile.config.Const.SERVER_REMOTE_REQUEST_METHOD
-import com.e.amicummobile.localRepository.TestDataRepository
+import com.e.amicummobile.repository.localRepository.TestDataRepository
 import com.e.amicummobile.modelAmicum.*
+import com.e.amicummobile.repository.IRepository
 
 /**
  * Итерактор запрашивает данные:

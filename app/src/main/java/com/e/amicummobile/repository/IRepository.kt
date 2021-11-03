@@ -1,4 +1,6 @@
-package com.e.amicummobile.modelAmicum
+package com.e.amicummobile.repository
+
+import com.e.amicummobile.modelAmicum.ConfigToRequest
 
 
 interface IRepository {

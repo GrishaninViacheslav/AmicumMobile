@@ -5,10 +5,12 @@ import android.os.Bundle
 import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import com.e.amicummobile.databinding.ActivityMainBinding
-import com.e.amicummobile.interfaces.IAppBarTopMain
-import com.e.amicummobile.interfaces.IAppMain
-import com.e.amicummobile.interfaces.IAppMainMenu
-import com.e.amicummobile.view.*
+import com.e.amicummobile.view.menu.IAppBarTopMain
+import com.e.amicummobile.view.menu.IAppMain
+import com.e.amicummobile.view.menu.IAppMainMenu
+import com.e.amicummobile.view.menu.NavigationMainMenuFragment
+import com.e.amicummobile.view.startApplication.AuthorizationFragment
+import com.e.amicummobile.view.startApplication.SplashScreenFragment
 import com.e.amicummobile.viewmodel.StoreAmicum
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

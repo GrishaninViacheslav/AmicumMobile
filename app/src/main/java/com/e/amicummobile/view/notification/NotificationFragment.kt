@@ -1,4 +1,4 @@
-package com.e.amicummobile.view
+package com.e.amicummobile.view.notification
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.amicummobile.R
-import com.e.amicummobile.adapters.vpNotificationAdapter
+import com.e.amicummobile.view.notification.adapters.vpNotificationAdapter
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.NotificationFragmentBinding
 import com.e.amicummobile.modelAmicum.Notification
 import com.e.amicummobile.modelAmicum.NotificationList
+import com.e.amicummobile.view.AppBarTopMainFragment
 import com.e.amicummobile.viewmodel.StoreAmicum
 
 /**

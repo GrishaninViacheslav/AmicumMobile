@@ -1,4 +1,4 @@
-package com.e.amicummobile.view
+package com.e.amicummobile.view.startApplication
 
 import android.content.Context
 import android.os.Bundle
@@ -10,8 +10,9 @@ import com.e.amicummobile.R
 import com.e.amicummobile.config.Bootstrap
 import com.e.amicummobile.config.Const
 import com.e.amicummobile.databinding.AuthorizationFragmentBinding
-import com.e.amicummobile.interfaces.IAppMain
+import com.e.amicummobile.view.menu.IAppMain
 import com.e.amicummobile.modelAmicum.UserSession
+import com.e.amicummobile.view.BaseFragment
 
 /**
  * Страница авторизации пользователя в системе
