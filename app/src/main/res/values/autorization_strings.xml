@@ -10,4 +10,5 @@
     <string name="chkActiveDirectory">Авторизация по ActiveDirectory</string>
     <string name="btnLogin">ВОЙТИ</string>
     <string name="smallLogo">Логотип</string>
+    <string name="hintSearch">Найти</string>
 </resources>

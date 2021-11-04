@@ -1,7 +1,7 @@
 package com.e.amicummobile.modelAmicum
 
 /**
- * Клсаа уведомлений - элемент
+ * Класс уведомлений - элемент
  * Notifications:[
  *      {
  *          id:                 "medicalExam"

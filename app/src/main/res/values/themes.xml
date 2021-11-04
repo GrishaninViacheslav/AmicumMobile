@@ -27,6 +27,7 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorHint">#B3B3B3</item>
     </style>
+
     <style name="LabelMessageText" parent="ThemeAmicumMobile">
         <item name="android:textColor">#B55A6E</item>
         <item name="android:textColorHint">#B3B3B3</item>
@@ -116,6 +117,27 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <!--Тулбар поиска пример-->
+    <style name="SearchViewTheme" parent="Widget.AppCompat.SearchView.ActionBar">
+        <item name="layout">@layout/toolbar_search_view</item>
+        <item name="commitIcon">@drawable/ic_search_commit</item>
+        <item name="colorControlNormal">@color/material_light_active_icon</item>
+        <item name="colorControlHighlight">@color/material_ripple_light</item>
+        <item name="autoCompleteTextViewStyle">@style/AutoCompleteTextViewStyle</item>
+        <item name="suggestionRowLayout">@layout/search_view_suggestion_row</item>
+        <item name="android:maxWidth">9999dp</item>
+    </style>
+
+    <style name="AutoCompleteTextViewStyle" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:popupBackground">@drawable/search_suggestions_bg</item>
+        <item name="android:popupElevation">0dp</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="searchViewStyle">@style/SearchViewTheme</item>
+    </style>
+    <!--end-->
 
 
 </resources>

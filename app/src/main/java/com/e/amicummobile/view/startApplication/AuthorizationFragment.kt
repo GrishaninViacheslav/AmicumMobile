@@ -73,7 +73,7 @@ class AuthorizationFragment : BaseFragment<UserSession>() {
 
             // выполняем авторизацию
             if (statusCheckField || Bootstrap.TYPE_BUILD == Const.VERSION_DEBUG) {
-                storeAmicum.getLogin(
+                storeAmicum.initLogin(
                     binding.txtLogin.text.toString(),
                     binding.txtPwd.text.toString(),
                     binding.checkBox.isChecked

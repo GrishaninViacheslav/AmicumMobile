@@ -9,6 +9,9 @@ import com.e.amicummobile.modelAmicum.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -23,14 +26,16 @@ class StoreAmicum(
 
     // STATE
     private val interactor: MainInteractor,
-    private var userSession: MutableLiveData<UserSession> = MutableLiveData(),
-    private var notificationAll: MutableLiveData<ArrayList<NotificationList<Notification>>> = MutableLiveData(),              // список уведомлений пользователя
+    private var userSession: MutableLiveData<UserSession> = MutableLiveData(),                      // сессия пользователя
+    private var notificationAll: MutableLiveData<ArrayList<NotificationList<Notification>>> = MutableLiveData(),// список уведомлений пользователя
+    private var departmentList: MutableLiveData<ArrayList<Company>> = MutableLiveData(),            // список подразделений
 
 ) : BaseViewModel() {
 
     // GETTER
     fun getUserSession() = userSession                                                              // получение объекта сессии
     fun getNotificationAll() = notificationAll                                                      // получение всех уведомлений пользователя
+    fun getDepartmentList() = departmentList                                                        // получение подразделений компании
     fun getNotificationPersonal(): MutableLiveData<ArrayList<NotificationList<Notification>>> {     // получение персональных уведомлений пользователя
         return notificationAll
     }
@@ -40,7 +45,7 @@ class StoreAmicum(
     /**
      * Метод авторизации пользователя на сервер и получения сессионных данных о нем
      */
-    fun getLogin(login: String, pwd: String, typeAuthorization: Boolean) {
+    fun initLogin(login: String, pwd: String, typeAuthorization: Boolean) {
         Log.println(Log.INFO, "storeAmicum.getLogin", "Запрос авторизации на сервере")
         Log.println(
             Log.INFO,
@@ -73,7 +78,7 @@ class StoreAmicum(
     /**
      * Метод получения всех уведомлений
      */
-    fun getNotification(companyId: Int?): MutableLiveData<ArrayList<NotificationList<Notification>>> {
+    fun initNotifications(companyId: Int?) {
         Log.println(Log.INFO, "storeAmicum.getNotification", "Запрос уведомлений на сервере")
         Log.println(Log.INFO, "storeAmicum.getNotification", "companyId: $companyId")
 
@@ -93,10 +98,26 @@ class StoreAmicum(
         cancelJob()
         viewModelCoroutineScope.launch { requestNotification(config, Const.TEST_REQUEST_METHOD) }
 
-
         Log.println(Log.INFO, "storeAmicum.getNotification", "Закончил выполнение: ")
+    }
 
-        return notificationAll
+    /**
+     * Метод получения списка подразделений
+     */
+    fun initDepartments() {
+        Log.println(Log.INFO, "storeAmicum.requestDepartments", "Запрос уведомлений на сервере")
+
+        val config = ConfigToRequest(
+            "handbooks\\Department",
+            "GetDepartmentList",
+            "",
+            ""
+        )
+
+        cancelJob()
+        viewModelCoroutineScope.launch { requestDepartments(config, Const.TEST_REQUEST_METHOD) }
+
+        Log.println(Log.INFO, "storeAmicum.requestDepartments", "Закончил выполнение: ")
     }
 
     /**
@@ -145,6 +166,15 @@ class StoreAmicum(
             notificationAll.postValue(temp.getItems())
         }
 
+    private suspend fun requestDepartments(configToRequest: ConfigToRequest, isOnline: String) =
+        withContext(Dispatchers.IO) {
+            class Token : TypeToken<JsonFromServer<ArrayList<Company>>>()
+
+            val response = interactor.getData(configToRequest, isOnline)
+            val temp: JsonFromServer<ArrayList<Company>> = Gson().fromJson(response, Token().type)
+            departmentList.postValue(temp.getItems())
+        }
+
 
     // Обрабатываем ошибки
     override fun handleError(error: Throwable) {
@@ -153,6 +183,19 @@ class StoreAmicum(
             "storeAmicum.handleError",
             error.message.toString()
         )
+    }
+
+    fun searchInDepartmentList(query: String): Flow<ArrayList<Company>> {
+        return flow {
+            var result: ArrayList<Company> = ArrayList()
+            if (departmentList.value != null) {
+                result = departmentList.value!!.filter { company -> company.title.indexOf(query) > -1 } as ArrayList<Company>
+            }
+            if (result.isEmpty()) {
+                result.add(Company(0, "Результат пуст", 0, ArrayList(), ArrayList())) //TODO переделать на sealed класс
+            }
+            emit(result)
+        }
     }
 
 

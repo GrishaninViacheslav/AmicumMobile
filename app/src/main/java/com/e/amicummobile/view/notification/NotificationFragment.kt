@@ -88,7 +88,7 @@ class NotificationFragment : Fragment() {
      */
     private fun initFragment(view: View) {
 
-        storeAmicum.getNotification(storeAmicum.getUserSession().value?.userCompanyId)             // получить уведомления пользователя с сервера
+        storeAmicum.initNotifications(storeAmicum.getUserSession().value?.userCompanyId)             // получить уведомления пользователя с сервера
 
         childFragmentManager.beginTransaction()                                                    // загружаем AppBarTop
             .add(
