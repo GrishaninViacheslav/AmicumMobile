@@ -64,21 +64,29 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     kapt 'com.android.databinding:compiler:3.1.4'
 
-    // RxJava 3
+    // RxJava 3 - реактивность
     implementation "io.reactivex.rxjava3:rxjava:3.0.13"
 
-    //Retrofit 2
+    //Retrofit 2 - запрос с сервера данных
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'                                   // для использования rxjava в ретрофите
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'             // для использования корутин в ретрофите
 
-    //Koin
+    //Koin - dependency injection
     //Основная библиотека
     implementation "io.insert-koin:koin-core:$koin_version"
     //Koin для поддержки Android (Scope,ViewModel ...)
     implementation "io.insert-koin:koin-android:$koin_version"
     //Для совместимости с Java
     implementation "io.insert-koin:koin-android-compat:$koin_version"
+
+    //Coil - загрузка изображений
+    implementation 'io.coil-kt:coil:1.4.0'
+
+    //Room - локальная БД
+    implementation 'androidx.room:room-runtime:2.3.0'
+    implementation "androidx.room:room-ktx:2.3.0"
+    kapt "androidx.room:room-compiler:2.3.0"
 }

@@ -1,14 +1,14 @@
 package com.e.amicummobile.repository.localRepository
 
 import com.e.amicummobile.modelAmicum.ConfigToRequest
-import com.e.amicummobile.repository.IRepository
+import com.e.amicummobile.repository.IRepositoryRemote
 
-object TestDataRepository : IRepository {
+class TestDataRepository : IRepositoryRemote {
     override suspend fun getData(configToRequest: ConfigToRequest): String =
         when (configToRequest.method) {
             "actionLogin" -> {
 
-                "{\"Items\":{\"sessionLogin\":\"root\",\"sessionPassword\":\"\",\"userWorkstation\":\"Администратор\",\"employee_id\":1,\"userName\":\"Не заполнено. Н. Н.\",\"last_name\":\"Не заполнено\",\"first_name\":\"Не заполнено\",\"patronymic\":\"Не заполнено\",\"gender\":\"М\",\"birthdate\":\"1970-01-01\",\"position_id\":1,\"position_title\":\"Прочее\",\"position_qualification\":null,\"worker_date_start\":\"2019-10-09\",\"worker_date_end\":\"2099-12-31\",\"userShift\":\"\",\"userCompany\":\"Прочее\",\"userCompanyId\":101,\"userMineId\":290,\"userMineTitle\":\"Заполярная-2\",\"mineCompanyId\":501,\"userDepartmentId\":1,\"userDepartmentTitle\":\"Прочее\",\"userDepartmentPath\":\"Прочее / \",\"userDepartmentTypeId\":2,\"userCompanyDepartmentId\":101,\"userWorkCompanyDepartmentId\":101,\"worker_id\":1,\"user_id\":1,\"workerObject_ids\":[100000009,1],\"userStaffNumber\":\"1\",\"tabel_number\":\"1\",\"session_id\":\"7ko4mjhhg4im3t06fsj75k930q\",\"worker_role\":{\"9\":\"Прочее\",\"172\":\"Гл. геолог\"},\"socket_key\":\"F60ElN8VMFF4047UlYub\"},\"status\":1,\"errors\":[],\"warnings\":[],\"debug\":[],\"debug_data\":[]}"
+                "{\"Items\":{\"user_image_src\":\"//phonoteka.org/uploads/posts/2021-07/1625676540_2-phonoteka-org-p-pop-art-merlin-krasivo-2.jpg\",\"sessionLogin\":\"root\",\"sessionPassword\":\"\",\"userWorkstation\":\"Администратор\",\"employee_id\":1,\"userName\":\"Не заполнено. Н. Н.\",\"last_name\":\"Не заполнено\",\"first_name\":\"Не заполнено\",\"patronymic\":\"Не заполнено\",\"gender\":\"М\",\"birthdate\":\"1970-01-01\",\"position_id\":1,\"position_title\":\"Прочее\",\"position_qualification\":null,\"worker_date_start\":\"2019-10-09\",\"worker_date_end\":\"2099-12-31\",\"userShift\":\"\",\"userCompany\":\"Прочее\",\"userCompanyId\":101,\"userMineId\":290,\"userMineTitle\":\"Заполярная-2\",\"mineCompanyId\":501,\"userDepartmentId\":1,\"userDepartmentTitle\":\"Прочее\",\"userDepartmentPath\":\"Прочее / \",\"userDepartmentTypeId\":2,\"userCompanyDepartmentId\":101,\"userWorkCompanyDepartmentId\":101,\"worker_id\":1,\"user_id\":1,\"workerObject_ids\":[100000009,1],\"userStaffNumber\":\"1\",\"tabel_number\":\"1\",\"session_id\":\"7ko4mjhhg4im3t06fsj75k930q\",\"worker_role\":{\"9\":\"Прочее\",\"172\":\"Гл. геолог\"},\"socket_key\":\"F60ElN8VMFF4047UlYub\"},\"status\":1,\"errors\":[],\"warnings\":[],\"debug\":[],\"debug_data\":[]}"
 
             }
             "GetNotificationAll" -> {

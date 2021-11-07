@@ -1,13 +1,16 @@
 package com.e.amicummobile.di
 
-import com.e.amicummobile.config.Const.SERVER_LOCAL_REQUEST_METHOD
-import com.e.amicummobile.config.Const.SERVER_REMOTE_REQUEST_METHOD
+import androidx.room.Room
+import com.e.amicummobile.controller.CoinImageLoader
+import com.e.amicummobile.controller.network.Network
+import com.e.amicummobile.db.AmicumDB
 import com.e.amicummobile.interactor.MainInteractor
 import com.e.amicummobile.repository.localRepository.RoomRepository
-import com.e.amicummobile.repository.IRepository
-import com.e.amicummobile.repository.remoteRepository.RetrofitImpl
+import com.e.amicummobile.repository.IRepositoryLocal
+import com.e.amicummobile.repository.IRepositoryRemote
+import com.e.amicummobile.repository.localRepository.TestDataRepository
 import com.e.amicummobile.viewmodel.StoreAmicum
-import org.koin.core.qualifier.named
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 
@@ -15,11 +18,20 @@ import org.koin.dsl.module
  * Общие для всего приложения инъекции
  */
 val application = module {
-    single<IRepository>(named(SERVER_REMOTE_REQUEST_METHOD)) { RetrofitImpl() }
-    single<IRepository>(named(SERVER_LOCAL_REQUEST_METHOD)) { RoomRepository() }
+    single<IRepositoryRemote> { TestDataRepository() }                                              // тестовый репозиторий
+//    single<IRepositoryRemote>() { RetrofitImpl() }                                                  // удаленный репозиторий
+    single<IRepositoryLocal> { RoomRepository(get()) }                                              // локальный репозиторий
+    single { CoinImageLoader(androidContext()) }                                                    // контекст приложения
+    single { Network(androidContext()) }                                                            // проваерка состояния сети
 }
 val mainScreen = module {
-    factory { MainInteractor(get(named(SERVER_REMOTE_REQUEST_METHOD)), get(named(SERVER_LOCAL_REQUEST_METHOD))) }
+    factory { MainInteractor(get(), get()) }
 
-    factory { StoreAmicum(get()) }
+    factory { StoreAmicum(get(), get()) }                                                           // главное вьюмодель приложения - хранит справочники
+}
+
+val db = module {
+    single { Room.databaseBuilder(get(), AmicumDB::class.java, "AmicumDB").build() }          // база данных
+    single { get<AmicumDB>().handbooksDao() }                                                       // доступ к справочникам системы
+
 }

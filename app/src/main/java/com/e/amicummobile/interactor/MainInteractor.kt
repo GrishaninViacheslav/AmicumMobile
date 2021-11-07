@@ -4,7 +4,9 @@ import com.e.amicummobile.config.Const.LOCAL_REQUEST_METHOD
 import com.e.amicummobile.config.Const.SERVER_REMOTE_REQUEST_METHOD
 import com.e.amicummobile.repository.localRepository.TestDataRepository
 import com.e.amicummobile.modelAmicum.*
-import com.e.amicummobile.repository.IRepository
+import com.e.amicummobile.repository.IRepositoryLocal
+import com.e.amicummobile.repository.IRepositoryRemote
+import java.util.*
 
 /**
  * Итерактор запрашивает данные:
@@ -13,14 +15,22 @@ import com.e.amicummobile.repository.IRepository
  *  - с тестовых данных
  */
 class MainInteractor(
-    private val remoteRepository: IRepository,
-    private val localRepository: IRepository
+    private val remoteRepository: IRepositoryRemote,
+    private val localRepository: IRepositoryLocal
 ) : IInteractor {
 
     override suspend fun getData(configToRequest: ConfigToRequest, modeRequest: String): String =
         when (modeRequest) {
-            LOCAL_REQUEST_METHOD -> remoteRepository.getData(configToRequest)                 // данные с локальной БД
-            SERVER_REMOTE_REQUEST_METHOD -> localRepository.getData(configToRequest)          // данные с сервера
-            else -> TestDataRepository.getData(configToRequest)                                     // тестовые данные
+            SERVER_REMOTE_REQUEST_METHOD -> remoteRepository.getData(configToRequest)               // данные с сервера
+            LOCAL_REQUEST_METHOD -> localRepository.getData(configToRequest)                        // данные с локальной БД
+            else -> TestDataRepository().getData(configToRequest)                                   // тестовые данные
         }
+
+    override suspend fun saveHandbookData(nameMethod: String, json: String) {
+        localRepository.saveHandbookData(nameMethod, json)
+    }
+
+    override suspend fun saveModuleData(period: String, date: Date, shift: Int, companyId: Int, methodName: String, json: String) {
+        TODO("Not yet implemented")
+    }
 }

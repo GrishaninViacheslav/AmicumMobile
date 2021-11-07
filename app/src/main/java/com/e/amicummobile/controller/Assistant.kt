@@ -25,6 +25,9 @@ object Assistant {
         return root["Items"].asJsonObject
     }
 
+    /**
+     * Метод преобразования даты в формате сервера в формат пользвоателя
+     */
     fun convertDateToFront(dateFromBack: String, withTime: Boolean = false): String {
         val formatterFrom: DateTimeFormatter = when (withTime) {                                    // шаблон для преобразования из строки в дату
             false -> DateTimeFormatter.ofPattern("yyyy-MM-dd")
