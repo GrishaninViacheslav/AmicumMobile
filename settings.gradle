@@ -7,4 +7,10 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "AmicumMobile"
+
 include ':app'
+include ':models'
+include ':utils'
+include ':config'
+include ':db'
+include ':repository'

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.e.amicummobile.config.Const
+import com.example.config.Const
 import com.e.amicummobile.databinding.AppBarTopMainFragmentBinding
 import com.e.amicummobile.viewmodel.StoreAmicum
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -59,28 +59,28 @@ class AppBarTopMainFragment : Fragment() {
         binding.tvAppBarTitle.text = title
 
         when (appBarType) {                                                                         // настройка видимости кнопок
-            Const.APP_BAR_MAIN -> {
+            com.example.config.Const.APP_BAR_MAIN -> {
                 binding.btnAppBarMainMenu.visibility = VISIBLE
                 binding.btnAppBarNotification.visibility = VISIBLE
                 binding.btnAppBarSearch.visibility = INVISIBLE
                 binding.btnAppBarBack.visibility = INVISIBLE
                 binding.btnAppBarApply.visibility = INVISIBLE
             }
-            Const.APP_BAR_SECOND -> {
+            com.example.config.Const.APP_BAR_SECOND -> {
                 binding.btnAppBarMainMenu.visibility = INVISIBLE
                 binding.btnAppBarNotification.visibility = INVISIBLE
                 binding.btnAppBarSearch.visibility = VISIBLE
                 binding.btnAppBarBack.visibility = VISIBLE
                 binding.btnAppBarApply.visibility = VISIBLE
             }
-            Const.APP_BAR_MODAL -> {
+            com.example.config.Const.APP_BAR_MODAL -> {
                 binding.btnAppBarMainMenu.visibility = INVISIBLE
                 binding.btnAppBarNotification.visibility = INVISIBLE
                 binding.btnAppBarSearch.visibility = INVISIBLE
                 binding.btnAppBarApply.visibility = VISIBLE
                 binding.btnAppBarBack.visibility = VISIBLE
             }
-            Const.APP_BAR_ONLY_BACK -> {
+            com.example.config.Const.APP_BAR_ONLY_BACK -> {
                 binding.btnAppBarMainMenu.visibility = INVISIBLE
                 binding.btnAppBarNotification.visibility = INVISIBLE
                 binding.btnAppBarSearch.visibility = INVISIBLE
@@ -91,10 +91,10 @@ class AppBarTopMainFragment : Fragment() {
 
         binding.btnAppBarBack.setOnClickListener {
             when (appBarType) {                                                                         // настройка поведения кнопки назад
-                Const.APP_BAR_MAIN, Const.APP_BAR_ONLY_BACK, Const.APP_BAR_SECOND -> {
+                com.example.config.Const.APP_BAR_MAIN, com.example.config.Const.APP_BAR_ONLY_BACK, com.example.config.Const.APP_BAR_SECOND -> {
                     mCallback!!.backFragment("BackFromFragment")
                 }
-                Const.APP_BAR_MODAL -> {
+                com.example.config.Const.APP_BAR_MODAL -> {
                     mCallback!!.backFragment("BackFromModal")
                 }
             }

@@ -8,6 +8,18 @@ object Config {
     val java_version = JavaVersion.VERSION_11
 }
 
+object Modules {
+    const val app = ":app"
+    const val repository = ":repository"
+    const val db = ":db"
+    const val models = ":models"
+    const val utils = ":utils"
+    const val config = ":config"
+
+    //Features
+    const val historyScreen = ":historyScreen"
+}
+
 object Version {
     const val kotlin = "1.5.31"
     const val retrofit = "2.9.0"

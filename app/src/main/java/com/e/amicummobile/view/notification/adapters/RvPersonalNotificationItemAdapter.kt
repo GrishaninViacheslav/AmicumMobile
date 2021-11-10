@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.e.amicummobile.R
-import com.e.amicummobile.controller.Assistant.convertDateToFront
-import com.e.amicummobile.modelAmicum.Notification
+import com.example.utils.Assistant.convertDateToFront
+import com.example.models.Notification
 
-class RvPersonalNotificationItemAdapter(private val notification: ArrayList<Notification>, private val notification_id: String) :
+class RvPersonalNotificationItemAdapter(private val notification: ArrayList<com.example.models.Notification>, private val notification_id: String) :
     RecyclerView.Adapter<RvPersonalNotificationItemAdapter.NotificationHolder>
         () {
 

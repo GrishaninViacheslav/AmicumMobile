@@ -31,6 +31,11 @@ android {
 }
 
 dependencies {
+    implementation project(Modules.models)
+    implementation project(Modules.utils)
+    implementation project(Modules.config)
+    implementation project(Modules.db)
+    implementation project(Modules.repository)
     implementation AndroidBase.core
     implementation AndroidBase.appCompat
     implementation AndroidBase.gson
@@ -68,9 +73,6 @@ dependencies {
     implementation KoinDI.core
     implementation KoinDI.koinAndroid
     implementation KoinDI.koinAndroidCompat
-
-    //Coil - загрузка изображений
-    implementation ImageLoader.coil
 
     //Room - локальная БД
     implementation Room.runtime

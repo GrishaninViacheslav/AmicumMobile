@@ -1,15 +1,14 @@
 package com.e.amicummobile.di
 
 import androidx.room.Room
-import com.e.amicummobile.controller.CoinImageLoader
-import com.e.amicummobile.controller.network.Network
-import com.e.amicummobile.db.AmicumDB
+import com.example.utils.network.Network
 import com.e.amicummobile.interactor.MainInteractor
-import com.e.amicummobile.repository.localRepository.RoomRepository
-import com.e.amicummobile.repository.IRepositoryLocal
-import com.e.amicummobile.repository.IRepositoryRemote
-import com.e.amicummobile.repository.localRepository.TestDataRepository
 import com.e.amicummobile.viewmodel.StoreAmicum
+import com.example.db.AmicumDB
+import com.example.repository.IRepositoryLocal
+import com.example.repository.IRepositoryRemote
+import com.example.repository.localRepository.RoomRepository
+import com.example.repository.localRepository.TestDataRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -20,7 +19,7 @@ val application = module {
     single<IRepositoryRemote> { TestDataRepository() }                                              // тестовый репозиторий
 //    single<IRepositoryRemote>() { RetrofitImpl() }                                                  // удаленный репозиторий
     single<IRepositoryLocal> { RoomRepository(get()) }                                              // локальный репозиторий
-    single { CoinImageLoader(androidContext()) }                                                    // контекст приложения
+    single { com.example.utils.CoinImageLoader(androidContext()) }                                                    // контекст приложения
     single { Network(androidContext()) }                                                            // проваерка состояния сети
 }
 val mainScreen = module {

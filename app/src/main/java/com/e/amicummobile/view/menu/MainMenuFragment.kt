@@ -8,9 +8,8 @@ import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.e.amicummobile.R
-import com.e.amicummobile.config.Const
+import com.example.config.Const
 import com.e.amicummobile.databinding.MainMenuFragmentBinding
-import com.e.amicummobile.modelAmicum.Company
 import com.e.amicummobile.viewmodel.StoreAmicum
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -61,7 +60,7 @@ class MainMenuFragment : Fragment() {
             .add(
                 R.id.containerAppBar, AppBarTopMainFragment.newInstance(
                     "Amicum_mobile",
-                    Const.APP_BAR_MAIN,
+                    com.example.config.Const.APP_BAR_MAIN,
                     "",
                     ""
                 )
@@ -92,8 +91,8 @@ class MainMenuFragment : Fragment() {
                 .flatMapLatest { query ->                                                           // если был поток до этого то прибивает его и делает новый
                     storeAmicum.searchInDepartmentList(query)                                       // запрос данных из вью модели
                         .catch {                                                                    // обработка ошибок потока
-                            var depList: ArrayList<Company> = ArrayList()
-                            depList.add(Company(0, "Ошибка", 0, ArrayList(), ArrayList()))
+                            var depList: ArrayList<com.example.models.Company> = ArrayList()
+                            depList.add(com.example.models.Company(0, "Ошибка", 0, ArrayList(), ArrayList()))
                             emit(depList)
                         }
                 }

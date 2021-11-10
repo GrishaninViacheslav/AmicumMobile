@@ -7,17 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import com.e.amicummobile.R
-import com.e.amicummobile.config.Bootstrap
-import com.e.amicummobile.config.Const
+import com.example.config.Bootstrap
+import com.example.config.Const
 import com.e.amicummobile.databinding.AuthorizationFragmentBinding
 import com.e.amicummobile.view.menu.IAppMain
-import com.e.amicummobile.modelAmicum.UserSession
 import com.e.amicummobile.view.BaseFragment
 
 /**
  * Страница авторизации пользователя в системе
  */
-class AuthorizationFragment : BaseFragment<UserSession>() {
+class AuthorizationFragment : BaseFragment<com.example.models.UserSession>() {
 
     private var _binding: AuthorizationFragmentBinding? = null
     private val binding get() = _binding!!
@@ -72,7 +71,7 @@ class AuthorizationFragment : BaseFragment<UserSession>() {
             }
 
             // выполняем авторизацию
-            if (statusCheckField || Bootstrap.TYPE_BUILD == Const.VERSION_DEBUG) {
+            if (statusCheckField || com.example.config.Bootstrap.TYPE_BUILD == com.example.config.Const.VERSION_DEBUG) {
                 storeAmicum.initLogin(
                     binding.txtLogin.text.toString(),
                     binding.txtPwd.text.toString(),
@@ -105,7 +104,7 @@ class AuthorizationFragment : BaseFragment<UserSession>() {
     }
 
 
-    private fun renderData(userSession: UserSession?) {
+    private fun renderData(userSession: com.example.models.UserSession?) {
         if (userSession == null) {
             showErrorScreen(getString(R.string.empty_server_response_on_success))
             binding.layoutLogin.error = " "

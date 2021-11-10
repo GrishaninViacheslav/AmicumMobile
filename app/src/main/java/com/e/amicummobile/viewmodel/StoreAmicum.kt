@@ -2,10 +2,8 @@ package com.e.amicummobile.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.e.amicummobile.controller.Assistant
-import com.e.amicummobile.controller.network.Network
+import com.example.utils.network.Network
 import com.e.amicummobile.interactor.MainInteractor
-import com.e.amicummobile.modelAmicum.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.*
@@ -25,9 +23,9 @@ class StoreAmicum(
     // STATE
     private val interactor: MainInteractor,                                                         // определяет откуда берем данные
     private val network: Network,                                                                   // состояние сети
-    private var userSession: MutableLiveData<UserSession> = MutableLiveData(),                      // сессия пользователя
-    private var notificationAll: MutableLiveData<ArrayList<NotificationList<Notification>>> = MutableLiveData(),// список уведомлений пользователя
-    private var departmentList: MutableLiveData<ArrayList<Company>> = MutableLiveData(),            // список подразделений
+    private var userSession: MutableLiveData<com.example.models.UserSession> = MutableLiveData(),                      // сессия пользователя
+    private var notificationAll: MutableLiveData<ArrayList<com.example.models.NotificationList<com.example.models.Notification>>> = MutableLiveData(),// список уведомлений пользователя
+    private var departmentList: MutableLiveData<ArrayList<com.example.models.Company>> = MutableLiveData(),            // список подразделений
 
 ) : BaseViewModel() {
 
@@ -35,7 +33,7 @@ class StoreAmicum(
     fun getUserSession() = userSession                                                              // получение объекта сессии
     fun getNotificationAll() = notificationAll                                                      // получение всех уведомлений пользователя
     fun getDepartmentList() = departmentList                                                        // получение подразделений компании
-    fun getNotificationPersonal(): MutableLiveData<ArrayList<NotificationList<Notification>>> {     // получение персональных уведомлений пользователя
+    fun getNotificationPersonal(): MutableLiveData<ArrayList<com.example.models.NotificationList<com.example.models.Notification>>> {     // получение персональных уведомлений пользователя
         return notificationAll
     }
 
@@ -58,9 +56,9 @@ class StoreAmicum(
             activeDirectoryFlag = typeAuthorization
         )
 
-        val jsonString: String = Assistant.toJson(payload)
+        val jsonString: String = com.example.utils.Assistant.toJson(payload)
 
-        val config = ConfigToRequest(
+        val config = com.example.models.ConfigToRequest(
             "UserAutorization",
             "actionLogin",
             "",
@@ -68,9 +66,11 @@ class StoreAmicum(
         )
 
         cancelJobs("requestSession")
-        viewModelCoroutineScope.launch {
+
+        val job = viewModelCoroutineScope.launch {
             requestSession(config, network.getTypeRequest())
         }
+        addJob("requestSession", job)
     }
 
 
@@ -85,9 +85,9 @@ class StoreAmicum(
             company_id = companyId
         )
 
-        val jsonString: String = Assistant.toJson(payload)
+        val jsonString: String = com.example.utils.Assistant.toJson(payload)
 
-        val config = ConfigToRequest(
+        val config = com.example.models.ConfigToRequest(
             "notification\\Notification",
             "GetNotificationAll",
             "",
@@ -96,7 +96,9 @@ class StoreAmicum(
 
         // TODO тут может быть кАсяк, т.к. разные справочники идут через одну корутину - могут отменяться другие запросы - оттестить дополнительно под нагрузкой
         cancelJobs("requestNotification")
-        val job1 = viewModelCoroutineScope.launch() { requestNotification(config, network.getTypeRequest()) }
+
+        val job = viewModelCoroutineScope.launch() { requestNotification(config, network.getTypeRequest()) }
+        addJob("requestNotification", job)
 
         Log.println(Log.INFO, "storeAmicum.getNotification", "Закончил выполнение: ")
     }
@@ -107,7 +109,7 @@ class StoreAmicum(
     fun initDepartments() {
         Log.println(Log.INFO, "storeAmicum.requestDepartments", "Запрос уведомлений на сервере")
 
-        val config = ConfigToRequest(
+        val config = com.example.models.ConfigToRequest(
             "handbooks\\Department",
             "GetDepartmentList",
             "",
@@ -115,7 +117,9 @@ class StoreAmicum(
         )
 
         cancelJobs("requestDepartments")
-        viewModelCoroutineScope.launch { requestDepartments(config, network.getTypeRequest()) }
+
+        val job = viewModelCoroutineScope.launch { requestDepartments(config, network.getTypeRequest()) }
+        addJob("requestDepartments", job)
 
         Log.println(Log.INFO, "storeAmicum.requestDepartments", "Закончил выполнение: ")
     }
@@ -147,42 +151,46 @@ class StoreAmicum(
         return statusSession
     }
 
-    private suspend fun requestSession(configToRequest: ConfigToRequest, isOnline: String) =
+    private suspend fun requestSession(configToRequest: com.example.models.ConfigToRequest, isOnline: String) =
         withContext(Dispatchers.IO) {
-            class Token : TypeToken<JsonFromServer<UserSession>>()
+            class Token : TypeToken<com.example.models.JsonFromServer<com.example.models.UserSession>>()
 
             val response = interactor.getData(configToRequest, isOnline)
             cancelJobs("requestSession:SaveHandbookData")
-            viewModelCoroutineScope.launch {
+            val job = viewModelCoroutineScope.launch {
                 interactor.saveHandbookData(configToRequest.method, response)
             }                                  // TODO - под большим вопросом!!! Рассмотреть вопрос сохранения сессии на телефоне - ограничение корпоративной безопасности
-
-            val temp: JsonFromServer<UserSession> = Gson().fromJson(response, Token().type)
+            addJob("requestSession:SaveHandbookData", job)
+            val temp: com.example.models.JsonFromServer<com.example.models.UserSession> = Gson().fromJson(response, Token().type)
             userSession.postValue(temp.getItems())
         }
 
 
-    private suspend fun requestNotification(configToRequest: ConfigToRequest, isOnline: String) =
+    private suspend fun requestNotification(configToRequest: com.example.models.ConfigToRequest, isOnline: String) =
         withContext(Dispatchers.IO) {
-            class Token : TypeToken<JsonFromServer<ArrayList<NotificationList<Notification>>>>()
+            class Token : TypeToken<com.example.models.JsonFromServer<ArrayList<com.example.models.NotificationList<com.example.models.Notification>>>>()
 
             val response = interactor.getData(configToRequest, isOnline)
             cancelJobs("requestNotification:SaveHandbookData")
-            viewModelCoroutineScope.launch { interactor.saveHandbookData(configToRequest.method, response) }
 
-            val temp: JsonFromServer<ArrayList<NotificationList<Notification>>> = Gson().fromJson(response, Token().type)
+            val job = viewModelCoroutineScope.launch { interactor.saveHandbookData(configToRequest.method, response) }
+            addJob("requestNotification:SaveHandbookData", job)
+
+            val temp: com.example.models.JsonFromServer<ArrayList<com.example.models.NotificationList<com.example.models.Notification>>> = Gson().fromJson(response, Token().type)
             notificationAll.postValue(temp.getItems())
         }
 
-    private suspend fun requestDepartments(configToRequest: ConfigToRequest, isOnline: String) =
+    private suspend fun requestDepartments(configToRequest: com.example.models.ConfigToRequest, isOnline: String) =
         withContext(Dispatchers.IO) {
-            class Token : TypeToken<JsonFromServer<ArrayList<Company>>>()
+            class Token : TypeToken<com.example.models.JsonFromServer<ArrayList<com.example.models.Company>>>()
 
             val response = interactor.getData(configToRequest, isOnline)
             cancelJobs("requestDepartments:SaveHandbookData")
-            viewModelCoroutineScope.launch { interactor.saveHandbookData(configToRequest.method, response) }
 
-            val temp: JsonFromServer<ArrayList<Company>> = Gson().fromJson(response, Token().type)
+            val job = viewModelCoroutineScope.launch { interactor.saveHandbookData(configToRequest.method, response) }
+            addJob("requestDepartments:SaveHandbookData", job)
+
+            val temp: com.example.models.JsonFromServer<ArrayList<com.example.models.Company>> = Gson().fromJson(response, Token().type)
             departmentList.postValue(temp.getItems())
         }
 
@@ -196,14 +204,14 @@ class StoreAmicum(
         )
     }
 
-    fun searchInDepartmentList(query: String): Flow<ArrayList<Company>> {
+    fun searchInDepartmentList(query: String): Flow<ArrayList<com.example.models.Company>> {
         return flow {
-            var result: ArrayList<Company> = ArrayList()
+            var result: ArrayList<com.example.models.Company> = ArrayList()
             if (departmentList.value != null) {
-                result = departmentList.value!!.filter { company -> company.title.indexOf(query) > -1 } as ArrayList<Company>
+                result = departmentList.value!!.filter { company -> company.title.indexOf(query) > -1 } as ArrayList<com.example.models.Company>
             }
             if (result.isEmpty()) {
-                result.add(Company(0, "Результат пуст", 0, ArrayList(), ArrayList())) //TODO переделать на sealed класс
+                result.add(com.example.models.Company(0, "Результат пуст", 0, ArrayList(), ArrayList())) //TODO переделать на sealed класс
             }
             emit(result)
         }

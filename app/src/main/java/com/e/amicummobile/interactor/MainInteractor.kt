@@ -1,11 +1,12 @@
 package com.e.amicummobile.interactor
 
-import com.e.amicummobile.config.Const.LOCAL_REQUEST_METHOD
-import com.e.amicummobile.config.Const.SERVER_REMOTE_REQUEST_METHOD
-import com.e.amicummobile.repository.localRepository.TestDataRepository
-import com.e.amicummobile.modelAmicum.*
-import com.e.amicummobile.repository.IRepositoryLocal
-import com.e.amicummobile.repository.IRepositoryRemote
+import com.example.config.Const.LOCAL_REQUEST_METHOD
+import com.example.config.Const.SERVER_REMOTE_REQUEST_METHOD
+import com.example.models.ConfigToRequest
+import com.example.repository.IRepositoryLocal
+import com.example.repository.IRepositoryRemote
+import com.example.repository.localRepository.TestDataRepository
+
 import java.util.*
 
 /**

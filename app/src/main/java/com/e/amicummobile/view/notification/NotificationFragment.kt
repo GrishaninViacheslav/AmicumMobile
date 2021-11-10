@@ -8,10 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.amicummobile.R
 import com.e.amicummobile.view.notification.adapters.VpNotificationAdapter
-import com.e.amicummobile.config.Const
+import com.example.config.Const
 import com.e.amicummobile.databinding.NotificationFragmentBinding
-import com.e.amicummobile.modelAmicum.Notification
-import com.e.amicummobile.modelAmicum.NotificationList
 import com.e.amicummobile.view.menu.AppBarTopMainFragment
 import com.e.amicummobile.viewmodel.StoreAmicum
 
@@ -56,7 +54,7 @@ class NotificationFragment : Fragment() {
     /**
      * Метод расчета количества уведомлений
      */
-    private fun getNotificationAllSize(notificationList: ArrayList<NotificationList<Notification>>?): Int {
+    private fun getNotificationAllSize(notificationList: ArrayList<com.example.models.NotificationList<com.example.models.Notification>>?): Int {
         var sizeNotification = 0
         if (notificationList != null) {
             for (notificationListItem in notificationList) {
@@ -94,7 +92,7 @@ class NotificationFragment : Fragment() {
             .add(
                 R.id.containerAppBar, AppBarTopMainFragment.newInstance(
                     "Уведомления",
-                    Const.APP_BAR_ONLY_BACK,
+                    com.example.config.Const.APP_BAR_ONLY_BACK,
                     "",
                     ""
                 )

@@ -8,11 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.e.amicummobile.R
-import com.e.amicummobile.modelAmicum.Notification
-import com.e.amicummobile.modelAmicum.NotificationList
+import com.example.models.Notification
+import com.example.models.NotificationList
 import com.google.android.material.imageview.ShapeableImageView
 
-class RvGroupNotificationAdapter(private val notificationList: ArrayList<NotificationList<Notification>>) :
+class RvGroupNotificationAdapter(private val notificationList: ArrayList<com.example.models.NotificationList<com.example.models.Notification>>) :
     RecyclerView.Adapter<RvGroupNotificationAdapter.GroupNotificationHolder>() {
 
     class GroupNotificationHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
