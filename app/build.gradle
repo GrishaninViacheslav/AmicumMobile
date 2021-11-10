@@ -8,9 +8,6 @@ android {
     compileSdkVersion 31
 
     defaultConfig {
-        applicationId "com.e.amicummobile"
-        minSdkVersion 26
-        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -24,15 +21,9 @@ android {
         }
     }
 
-
-    buildFeatures {
-        dataBinding true
-        viewBinding true
-    }
-
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility Config.java_version
+        targetCompatibility Config.java_version
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -57,9 +48,9 @@ dependencies {
     implementation AndroidDesign.lifecycleViewModel
     kapt AndroidDesign.design
 
-    testImplementation Test.junit
-    androidTestImplementation Test.junitExt
-    androidTestImplementation Test.espressoCore
+    testImplementation TestUnit.junit
+    androidTestImplementation TestUnit.junitExt
+    androidTestImplementation TestUnit.espressoCore
 
     implementation Kotlin.kotlin
 

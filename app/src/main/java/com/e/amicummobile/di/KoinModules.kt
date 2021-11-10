@@ -13,7 +13,6 @@ import com.e.amicummobile.viewmodel.StoreAmicum
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-
 /**
  * Общие для всего приложения инъекции
  */

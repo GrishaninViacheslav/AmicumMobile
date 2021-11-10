@@ -1,3 +1,13 @@
+import org.gradle.api.JavaVersion
+
+object Config {
+    const val application_id = "com.e.amicummobile"
+    const val compile_sdk = 31
+    const val min_sdk = 26
+    const val target_sdk = 31
+    val java_version = JavaVersion.VERSION_11
+}
+
 object Version {
     const val kotlin = "1.5.31"
     const val retrofit = "2.9.0"
@@ -80,7 +90,7 @@ object AndroidBase {
     const val legacy = "androidx.legacy:legacy-support-v4:${Version.legacy}"
 }
 
-object Test {
+object TestUnit {
     const val junit = "junit:junit:${Version.junit}"
     const val junitExt = "androidx.test.ext:junit:${Version.junitExt}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${Version.espressoCore}"
