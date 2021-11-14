@@ -156,9 +156,9 @@ class MainActivity : AppCompatActivity(), IAppBarTopMain, IAppMainMenu, IAppMain
     }
 
     companion object {
-        private const val SLIDE_LEFT_DURATION = 20000L
-        private const val COUNTDOWN_DURATION = 2000L
-        private const val COUNTDOWN_INTERVAL = 1000L
+        private const val SLIDE_LEFT_DURATION = 700L
+        private const val COUNTDOWN_DURATION = 500L
+        private const val COUNTDOWN_INTERVAL = 100L
     }
 
 
