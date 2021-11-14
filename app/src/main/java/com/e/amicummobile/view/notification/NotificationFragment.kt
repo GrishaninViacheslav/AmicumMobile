@@ -13,7 +13,6 @@ import com.e.amicummobile.view.menu.AppBarTopMainFragment
 import com.e.amicummobile.viewmodel.StoreAmicum
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
-import org.koin.java.KoinJavaComponent
 import org.koin.java.KoinJavaComponent.getKoin
 
 /**
@@ -39,10 +38,10 @@ class NotificationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         storeAmicum = ViewModelProvider(requireActivity())[StoreAmicum::class.java]
-        notificationScopeInstance = KoinJavaComponent.getKoin().getOrCreateScope("notificationScopeId", named("NOTIFICATION_STORE"))
+        notificationScopeInstance = getKoin().getOrCreateScope("notificationScopeId", named("NOTIFICATION_STORE"))
         notificationStore = notificationScopeInstance.get()
 
-        initFragment(view)                                                                          // инициализируем фрагмент
+        initFragment()                                                                          // инициализируем фрагмент
 
         initObserve()                                                                               // инициализируем наблюдателей за обновлением данных в локальном хранилище
 
@@ -90,11 +89,11 @@ class NotificationFragment : Fragment() {
     /**
      * Метод инициализации фрагмента
      */
-    private fun initFragment(view: View) {
+    private fun initFragment() {
 
-        notificationStore.initNotifications(storeAmicum.getUserSession().value?.userCompanyId)             // получить уведомления пользователя с сервера
+        notificationStore.initNotifications(storeAmicum.getUserSession().value?.userCompanyId)      // получить уведомления пользователя с сервера
 
-        childFragmentManager.beginTransaction()                                                    // загружаем AppBarTop
+        childFragmentManager.beginTransaction()                                                     // загружаем AppBarTop
             .add(
                 R.id.containerAppBar, AppBarTopMainFragment.newInstance(
                     "Уведомления",

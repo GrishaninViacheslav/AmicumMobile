@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.e.amicummobile.view.notification.adapters.RvGroupNotificationAdapter
 import com.e.amicummobile.databinding.GroupNotificationFragmentBinding
-import org.koin.core.component.getScopeId
-import org.koin.core.component.getScopeName
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 import org.koin.java.KoinJavaComponent
