@@ -1,5 +1,6 @@
 package com.e.amicummobile.view.startApplication
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,6 +15,7 @@ import com.e.amicummobile.databinding.SplashScreenFragmentBinding
 /**
  * Страница авторизации пользователя в системе
  */
+@SuppressLint("CustomSplashScreen")
 class SplashScreenFragment : Fragment() {
 
     private var _binding: SplashScreenFragmentBinding? = null

@@ -8,11 +8,11 @@ import com.e.amicummobile.di.notification
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
-class TranslatorApp : Application() {
+class AmicumApp : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            androidContext(this@TranslatorApp)
+            androidContext(this@AmicumApp)
             modules(
                 listOf(
                     application,
