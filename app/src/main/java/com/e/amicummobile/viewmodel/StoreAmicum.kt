@@ -24,21 +24,15 @@ class StoreAmicum(
     private val interactor: MainInteractor,                                                         // определяет откуда берем данные
     private val network: Network,                                                                   // состояние сети
     private var userSession: MutableLiveData<com.example.models.UserSession> = MutableLiveData(),                      // сессия пользователя
-    private var notificationAll: MutableLiveData<ArrayList<com.example.models.NotificationList<com.example.models.Notification>>> = MutableLiveData(),// список уведомлений пользователя
     private var departmentList: MutableLiveData<ArrayList<com.example.models.Company>> = MutableLiveData(),            // список подразделений
 
 ) : BaseViewModel() {
 
     // GETTER
     fun getUserSession() = userSession                                                              // получение объекта сессии
-    fun getNotificationAll() = notificationAll                                                      // получение всех уведомлений пользователя
     fun getDepartmentList() = departmentList                                                        // получение подразделений компании
-    fun getNotificationPersonal(): MutableLiveData<ArrayList<com.example.models.NotificationList<com.example.models.Notification>>> {     // получение персональных уведомлений пользователя
-        return notificationAll
-    }
 
     // ACTION
-
     /**
      * Метод авторизации пользователя на сервер и получения сессионных данных о нем
      */
@@ -73,36 +67,6 @@ class StoreAmicum(
         addJob("requestSession", job)
     }
 
-
-    /**
-     * Метод получения всех уведомлений
-     */
-    fun initNotifications(companyId: Int?) {
-        Log.println(Log.INFO, "storeAmicum.getNotification", "Запрос уведомлений на сервере")
-        Log.println(Log.INFO, "storeAmicum.getNotification", "companyId: $companyId")
-
-        val payload = NotificationAllRequest(
-            company_id = companyId
-        )
-
-        val jsonString: String = com.example.utils.Assistant.toJson(payload)
-
-        val config = com.example.models.ConfigToRequest(
-            "notification\\Notification",
-            "GetNotificationAll",
-            "",
-            jsonString
-        )
-
-        // TODO тут может быть кАсяк, т.к. разные справочники идут через одну корутину - могут отменяться другие запросы - оттестить дополнительно под нагрузкой
-        cancelJobs("requestNotification")
-
-        val job = viewModelCoroutineScope.launch() { requestNotification(config, network.getTypeRequest()) }
-        addJob("requestNotification", job)
-
-        Log.println(Log.INFO, "storeAmicum.getNotification", "Закончил выполнение: ")
-    }
-
     /**
      * Метод получения списка подразделений
      */
@@ -134,13 +98,6 @@ class StoreAmicum(
     )
 
     /**
-     * класс запроса уведомлений
-     */
-    data class NotificationAllRequest(
-        val company_id: Int?
-    )
-
-    /**
      * Метод проверки наличия авторизации пользователя на сервере
      */
     fun checkUserSession(): Boolean {
@@ -163,21 +120,6 @@ class StoreAmicum(
             addJob("requestSession:SaveHandbookData", job)
             val temp: com.example.models.JsonFromServer<com.example.models.UserSession> = Gson().fromJson(response, Token().type)
             userSession.postValue(temp.getItems())
-        }
-
-
-    private suspend fun requestNotification(configToRequest: com.example.models.ConfigToRequest, isOnline: String) =
-        withContext(Dispatchers.IO) {
-            class Token : TypeToken<com.example.models.JsonFromServer<ArrayList<com.example.models.NotificationList<com.example.models.Notification>>>>()
-
-            val response = interactor.getData(configToRequest, isOnline)
-            cancelJobs("requestNotification:SaveHandbookData")
-
-            val job = viewModelCoroutineScope.launch { interactor.saveHandbookData(configToRequest.method, response) }
-            addJob("requestNotification:SaveHandbookData", job)
-
-            val temp: com.example.models.JsonFromServer<ArrayList<com.example.models.NotificationList<com.example.models.Notification>>> = Gson().fromJson(response, Token().type)
-            notificationAll.postValue(temp.getItems())
         }
 
     private suspend fun requestDepartments(configToRequest: com.example.models.ConfigToRequest, isOnline: String) =
@@ -216,6 +158,4 @@ class StoreAmicum(
             emit(result)
         }
     }
-
-
 }

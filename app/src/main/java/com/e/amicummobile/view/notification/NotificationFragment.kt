@@ -8,10 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.amicummobile.R
 import com.e.amicummobile.view.notification.adapters.VpNotificationAdapter
-import com.example.config.Const
 import com.e.amicummobile.databinding.NotificationFragmentBinding
 import com.e.amicummobile.view.menu.AppBarTopMainFragment
 import com.e.amicummobile.viewmodel.StoreAmicum
+import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
+import org.koin.java.KoinJavaComponent
+import org.koin.java.KoinJavaComponent.getKoin
 
 /**
  * Уведомления
@@ -21,7 +24,8 @@ class NotificationFragment : Fragment() {
     private var _binding: NotificationFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var storeAmicum: StoreAmicum
-
+    private lateinit var notificationStore: StoreNotification
+    private lateinit var notificationScopeInstance: Scope
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +39,8 @@ class NotificationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         storeAmicum = ViewModelProvider(requireActivity())[StoreAmicum::class.java]
+        notificationScopeInstance = KoinJavaComponent.getKoin().getOrCreateScope("notificationScopeId", named("NOTIFICATION_STORE"))
+        notificationStore = notificationScopeInstance.get()
 
         initFragment(view)                                                                          // инициализируем фрагмент
 
@@ -46,7 +52,7 @@ class NotificationFragment : Fragment() {
      * Метод инициализации наблюдателей за изменением данных
      */
     private fun initObserve() {
-        storeAmicum.getNotificationAll().observe(viewLifecycleOwner, {
+        notificationStore.getNotificationAll().observe(viewLifecycleOwner, {
             setGroupNotificationBadge(getNotificationAllSize(it))
         })
     }
@@ -86,7 +92,7 @@ class NotificationFragment : Fragment() {
      */
     private fun initFragment(view: View) {
 
-        storeAmicum.initNotifications(storeAmicum.getUserSession().value?.userCompanyId)             // получить уведомления пользователя с сервера
+        notificationStore.initNotifications(storeAmicum.getUserSession().value?.userCompanyId)             // получить уведомления пользователя с сервера
 
         childFragmentManager.beginTransaction()                                                    // загружаем AppBarTop
             .add(
@@ -104,18 +110,17 @@ class NotificationFragment : Fragment() {
         tabNotifications.setupWithViewPager(binding.vpNotificationsFragment)
 
 
-        setGroupNotificationBadge(getNotificationAllSize(storeAmicum.getNotificationAll().value))   // Заполнение вкладок уведомлений бэйджиками
+        setGroupNotificationBadge(getNotificationAllSize(notificationStore.getNotificationAll().value))   // Заполнение вкладок уведомлений бэйджиками
 
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        notificationScopeInstance.close()
     }
 
     companion object {
         fun newInstance() = NotificationFragment()
     }
-
-
 }

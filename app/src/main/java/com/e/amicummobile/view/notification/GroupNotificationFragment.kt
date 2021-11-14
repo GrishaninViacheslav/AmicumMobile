@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.e.amicummobile.view.notification.adapters.RvGroupNotificationAdapter
 import com.e.amicummobile.databinding.GroupNotificationFragmentBinding
-import com.e.amicummobile.viewmodel.StoreAmicum
+import org.koin.core.component.getScopeId
+import org.koin.core.component.getScopeName
+import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
+import org.koin.java.KoinJavaComponent
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +30,8 @@ class GroupNotificationFragment : Fragment() {
     private var param2: String? = null
     private var _binding: GroupNotificationFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var storeAmicum: StoreAmicum
+    private lateinit var notificationStore: StoreNotification
+    private lateinit var notificationScopeInstance: Scope
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,14 +52,15 @@ class GroupNotificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        storeAmicum = ViewModelProvider(requireActivity())[StoreAmicum::class.java]
+        notificationScopeInstance = KoinJavaComponent.getKoin().getOrCreateScope("notificationScopeId", named("NOTIFICATION_STORE"))
+        notificationStore = notificationScopeInstance.get()
 
         val rvGroupNotification = binding.rvGroupNotification
         rvGroupNotification.layoutManager = LinearLayoutManager(requireContext())
 
-        rvGroupNotification.adapter = storeAmicum.getNotificationAll().value?.let { RvGroupNotificationAdapter(it) }
+        rvGroupNotification.adapter = notificationStore.getNotificationAll().value?.let { RvGroupNotificationAdapter(it) }
 
-        storeAmicum.getNotificationAll().observe(viewLifecycleOwner, {
+        notificationStore.getNotificationAll().observe(viewLifecycleOwner, {
             rvGroupNotification.adapter = RvGroupNotificationAdapter(it)
         })
 

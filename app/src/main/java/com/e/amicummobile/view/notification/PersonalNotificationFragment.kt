@@ -5,11 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.e.amicummobile.view.notification.adapters.RvPersonalNotificationAdapter
 import com.e.amicummobile.databinding.PersonalNotificationFragmentBinding
-import com.e.amicummobile.viewmodel.StoreAmicum
+import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
+import org.koin.java.KoinJavaComponent
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +28,8 @@ class PersonalNotificationFragment : Fragment() {
     private var param2: String? = null
     private var _binding: PersonalNotificationFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var storeAmicum: StoreAmicum
+    private lateinit var notificationStore: StoreNotification
+    private lateinit var notificationScopeInstance: Scope
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,14 +50,15 @@ class PersonalNotificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        storeAmicum = ViewModelProvider(requireActivity())[StoreAmicum::class.java]
+        notificationScopeInstance = KoinJavaComponent.getKoin().getOrCreateScope("notificationScopeId", named("NOTIFICATION_STORE"))
+        notificationStore = notificationScopeInstance.get()
 
         val rvPersonalNotification = binding.rvPersonalNotification
         rvPersonalNotification.layoutManager = LinearLayoutManager(requireContext())
 
-        rvPersonalNotification.adapter = storeAmicum.getNotificationPersonal().value?.let { RvPersonalNotificationAdapter(it) }
+        rvPersonalNotification.adapter = notificationStore.getNotificationPersonal().value?.let { RvPersonalNotificationAdapter(it) }
 
-        storeAmicum.getNotificationAll().observe(viewLifecycleOwner, {
+        notificationStore.getNotificationAll().observe(viewLifecycleOwner, {
             rvPersonalNotification.adapter = RvPersonalNotificationAdapter(it)
         })
 
