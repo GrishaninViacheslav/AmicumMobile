@@ -10,6 +10,11 @@ dependencies {
     //Coil - загрузка изображений
     implementation ImageLoader.coil
     implementation AndroidBase.gson
+
+    implementation TestUnit.junit
+    implementation TestUnit.junitExt
+    implementation TestUnit.espressoCore
+
     implementation project(Modules.config)
 
 }
