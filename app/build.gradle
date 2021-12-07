@@ -78,4 +78,12 @@ dependencies {
     implementation Room.runtime
     implementation Room.ktx
     kapt Room.compiler
+
+    // Mockito - тестирование
+    testImplementation Mockito.mockitoCore
+    testImplementation Mockito.mockitoInline
+    testImplementation(Mockito.mockitoKotlin) {
+        exclude group: 'org.jetbrains.kotlin'
+        exclude group: 'org.mockito'
+    }
 }

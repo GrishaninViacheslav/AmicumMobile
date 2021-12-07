@@ -46,6 +46,9 @@ object Version {
     const val junit = "4.13.2"
     const val junitExt = "1.1.3"
     const val espressoCore = "3.4.0"
+    const val mockitoCore = "4.1.0"
+    const val mockitoInline = "4.1.0"
+    const val mockitoKotlin = "1.5.0"
 }
 
 object RxJava {
@@ -106,4 +109,11 @@ object TestUnit {
     const val junit = "junit:junit:${Version.junit}"
     const val junitExt = "androidx.test.ext:junit:${Version.junitExt}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${Version.espressoCore}"
+}
+
+
+object Mockito {
+    const val mockitoCore = "org.mockito:mockito-core:${Version.mockitoCore}"
+    const val mockitoInline = "org.mockito:mockito-inline:${Version.mockitoInline}"
+    const val mockitoKotlin = "com.nhaarman:mockito-kotlin:${Version.mockitoKotlin}"
 }
