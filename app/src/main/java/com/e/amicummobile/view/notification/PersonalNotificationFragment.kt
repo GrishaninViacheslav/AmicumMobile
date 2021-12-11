@@ -1,20 +1,21 @@
 package com.e.amicummobile.view.notification
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.e.amicummobile.R
+import com.e.amicummobile.view.BaseFragment
 import com.e.amicummobile.view.notification.adapters.RvPersonalNotificationAdapter
 import com.e.amicummobile.view.viewById
+import com.example.models.Notification
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 import org.koin.java.KoinJavaComponent
 
-class PersonalNotificationFragment : Fragment() {
+class PersonalNotificationFragment : BaseFragment<Notification>() {
     private lateinit var notificationStore: StoreNotification
     private lateinit var notificationScopeInstance: Scope
 

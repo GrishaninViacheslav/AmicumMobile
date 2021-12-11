@@ -10,6 +10,7 @@ import com.example.repository.IRepositoryLocal
 import com.example.repository.IRepositoryRemote
 import com.example.repository.localRepository.RoomRepository
 import com.example.repository.localRepository.TestDataRepository
+import com.example.repository.remoteRepository.api.RetrofitImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -18,12 +19,21 @@ import org.koin.dsl.module
  * Общие для всего приложения инъекции
  */
 val application = module {
-    single<IRepositoryRemote> { TestDataRepository() }                                              // тестовый репозиторий
-//    single<IRepositoryRemote>() { RetrofitImpl() }                                                  // удаленный репозиторий
-    single<IRepositoryLocal> { RoomRepository(get()) }                                              // локальный репозиторий
-    single { com.example.utils.CoinImageLoader(androidContext()) }                                                    // контекст приложения
+    single { com.example.utils.CoinImageLoader(androidContext()) }                                  // контекст приложения
     single { Network(androidContext()) }                                                            // проваерка состояния сети
 }
+
+val repositoryTest = module {                                                                       // список репозиториев в режиме тестирования
+    single<IRepositoryRemote> { TestDataRepository() }                                              // тестовый репозиторий
+    single<IRepositoryLocal> { RoomRepository(get()) }                                              // локальный репозиторий
+}
+
+val repositoryProd = module {                                                                       // список репозиториев в режиме Продакшен
+    single<IRepositoryRemote> { RetrofitImpl() }                                                    // удаленный репозиторий
+    single<IRepositoryLocal> { RoomRepository(get()) }                                              // локальный репозиторий
+}
+
+
 val mainScreen = module {
     factory { MainInteractor(get(), get()) }
 
@@ -38,5 +48,11 @@ val db = module {
 val notification = module {
     scope(named("NOTIFICATION_STORE")) {
         scoped { StoreNotification(get(), get()) }
+    }
+}
+
+val storeAmicum = module {
+    scope(named("AMICUM_STORE")) {
+        scoped { StoreAmicum(get(), get()) }
     }
 }

@@ -23,3 +23,10 @@ dependencies {
     androidTestImplementation TestUnit.junitExt
     androidTestImplementation TestUnit.espressoCore
 }
+
+android {
+    signingConfigs {
+        release {
+        }
+    }
+}

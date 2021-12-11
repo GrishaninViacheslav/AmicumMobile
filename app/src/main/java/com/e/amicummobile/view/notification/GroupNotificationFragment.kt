@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.e.amicummobile.view.notification.adapters.RvGroupNotificationAdapter
 import com.e.amicummobile.databinding.GroupNotificationFragmentBinding
+import com.e.amicummobile.view.BaseFragment
+import com.example.models.Notification
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 import org.koin.java.KoinJavaComponent
@@ -22,7 +24,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [GroupNotificationFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class GroupNotificationFragment : Fragment() {
+class GroupNotificationFragment : BaseFragment<Notification>() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null

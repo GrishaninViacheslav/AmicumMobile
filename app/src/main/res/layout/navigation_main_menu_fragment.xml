@@ -6,6 +6,6 @@
         android:id="@+id/navigationMainMenu"
         android:layout_width="300dp"
         android:layout_height="match_parent"
-
+        android:theme="@style/ThemeAmicumMobile"
         app:headerLayout="@layout/header_navigation_main_drawer" />
 

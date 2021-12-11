@@ -8,15 +8,16 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 
 import com.e.amicummobile.databinding.SplashScreenFragmentBinding
+import com.e.amicummobile.view.BaseFragment
+import com.example.models.Notification
 
 /**
  * Страница авторизации пользователя в системе
  */
 @SuppressLint("CustomSplashScreen")
-class SplashScreenFragment : Fragment() {
+class SplashScreenFragment : BaseFragment<Notification>() {
 
     private var _binding: SplashScreenFragmentBinding? = null
     private val binding get() = _binding!!

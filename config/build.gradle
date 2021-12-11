@@ -7,3 +7,10 @@ dependencies {
     implementation AndroidBase.core
 
 }
+
+android {
+    signingConfigs {
+        release {
+        }
+    }
+}

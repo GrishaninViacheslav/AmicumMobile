@@ -4,7 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import com.e.amicummobile.interactor.MainInteractor
 import com.example.config.Const
 import com.example.models.Company
+import com.example.models.ConfigToRequest
 import com.example.models.UserSession
+import com.example.utils.Assistant
 import com.example.utils.network.Network
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
@@ -56,9 +58,9 @@ class StoreAmicumTest {
             activeDirectoryFlag = typeAuthorization
         )
 
-        val jsonString: String = com.example.utils.Assistant.toJson(payload)
+        val jsonString: String = Assistant.toJson(payload)
 
-        val config = com.example.models.ConfigToRequest(
+        val config = ConfigToRequest(
             "UserAutorization",
             "actionLogin",
             "",
