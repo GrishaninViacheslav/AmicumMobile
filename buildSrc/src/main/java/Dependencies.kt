@@ -55,6 +55,7 @@ object Version {
     const val testRunner = "1.4.0"
     const val testExtTruth = "1.4.0"
     const val fragmentTesting = "1.4.0"
+    const val uiautomator = "2.2.0"
 }
 
 object RxJava {
@@ -121,6 +122,7 @@ object TestUnit {
     const val espressoIntents = "androidx.test.espresso:espresso-intents:${Version.espressoIntents}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${Version.espressoCore}"
     const val fragmentTesting = "androidx.fragment:fragment-testing:${Version.fragmentTesting}"
+    const val uiautomator = "androidx.test.uiautomator:uiautomator:${Version.uiautomator}"
 }
 
 object Mockito {
