@@ -100,6 +100,8 @@ dependencies {
     testImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'                         // автоматизированное тестирование UI
     debugImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'                             // прокрутка списков
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0'                        // тест корутин
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'                                      // InstantTaskExecutorRule
 
     implementation Kotlin.kotlin
 
