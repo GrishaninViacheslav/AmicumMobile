@@ -13,9 +13,19 @@
                 app:destination="@id/notificationFragment"
                 app:enterAnim="@android:anim/fade_in"
                 app:exitAnim="@android:anim/fade_out" />
+        <action
+                android:id="@+id/action_mainMenuFragment_to_settingsFragment"
+                app:destination="@id/settingsFragment"
+                app:enterAnim="@android:anim/fade_in"
+                app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
             android:id="@+id/notificationFragment"
             android:name="com.e.amicummobile.view.notification.NotificationFragment"
             android:label="NotificationFragment" />
+
+    <fragment
+            android:id="@+id/settingsFragment"
+            android:name="com.e.amicummobile.view.settings.SettingsFragment"
+            android:label="SettingsFragment" />
 </navigation>

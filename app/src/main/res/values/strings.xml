@@ -22,4 +22,5 @@
     <string name="ot">от</string>
     <string name="ppkPab">ППК ПАБ</string>
     <string name="empty_server_response_on_success">Ответ с сервера пустой</string>
+    <string name="night_theme">Всегда использовать тёмную тему</string>
 </resources>

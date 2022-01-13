@@ -133,16 +133,23 @@ class MainActivity : AppCompatActivity(), IAppBarTopMain, IAppMainMenu, IAppMain
             binding.drawerMainMenu.closeDrawer(GravityCompat.START)
         }
         when (nameFragment) {
+            "SettingsFragment" -> openSettings()
             "NotificationFragment" -> openNotifications("NotificationFragment")
             "MainFragment" -> openMain("MainFragment")
         }
     }
+
+
 
     /**
      * Метод открытия фрагмента уведомлений
      */
     override fun openNotifications(string: String) {
         binding.container.findNavController().navigate(R.id.notificationFragment)
+    }
+
+    override fun openSettings() {
+        binding.container.findNavController().navigate(R.id.settingsFragment)
     }
 
     /**

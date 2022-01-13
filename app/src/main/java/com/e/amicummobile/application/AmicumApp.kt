@@ -19,6 +19,7 @@ class AmicumApp : Application() {
                         db,
                         mainScreen,
                         notification,
+                        settings,
                         storeAmicum
                     )
                 )
@@ -30,6 +31,7 @@ class AmicumApp : Application() {
                         db,
                         mainScreen,
                         notification,
+                        settings,
                         storeAmicum
                     )
                 )

@@ -3,8 +3,10 @@ package com.e.amicummobile.di
 import androidx.room.Room
 import com.example.utils.network.Network
 import com.e.amicummobile.interactor.MainInteractor
+import com.e.amicummobile.interactor.settings.SettingsInteractor
 import com.e.amicummobile.view.notification.StoreNotification
 import com.e.amicummobile.viewmodel.StoreAmicum
+import com.e.amicummobile.viewmodel.StoreSettings
 import com.example.db.AmicumDB
 import com.example.repository.IRepositoryLocal
 import com.example.repository.IRepositoryRemote
@@ -36,7 +38,7 @@ val repositoryProd = module {                                                   
 
 val mainScreen = module {
     factory { MainInteractor(get(), get()) }
-
+    factory { SettingsInteractor() }
     factory { StoreAmicum(get(), get()) }                                                           // главное вьюмодель приложения - хранит справочники
 }
 
@@ -48,6 +50,12 @@ val db = module {
 val notification = module {
     scope(named("NOTIFICATION_STORE")) {
         scoped { StoreNotification(get(), get()) }
+    }
+}
+
+val settings = module {
+    scope(named("SETTINGS_STORE")) {
+        scoped { StoreSettings(get()) }
     }
 }
 

@@ -47,6 +47,10 @@ class NavigationMainMenuFragment : BaseFragment<UserSession>() {
             mCallback!!.openFragment("NotificationFragment")
         }
 
+        binding.btnMainMenuSettings.setOnClickListener {
+            mCallback!!.openFragment("SettingsFragment")
+        }
+
         storeAmicum.getUserSession().observe(viewLifecycleOwner, {
             renderData(it)
         })
